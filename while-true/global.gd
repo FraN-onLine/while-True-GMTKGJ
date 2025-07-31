@@ -1,1 +1,69 @@
 extends Node
+
+# Global game state management
+var current_level: int = 1
+var current_sequence: Array = []
+var detected_sequence: Array = []
+var is_loop_active: bool = true
+var loop_timer: float = 0.0
+var loop_duration: float = 5.0  # Default loop duration in seconds
+
+# Signal for when a sequence is detected
+signal sequence_detected(sequence: Array)
+signal loop_broken
+signal level_completed
+
+func _ready():
+	# Initialize the first level
+	load_level(current_level)
+
+func load_level(level_number: int):
+	current_level = level_number
+	current_sequence = []
+	detected_sequence = []
+	is_loop_active = true
+	loop_timer = 0.0
+	
+	# Set level-specific parameters
+	match level_number:
+		1:
+			loop_duration = 5.0
+			current_sequence = ["anvil_fall", "hole_appear", "hole_close"]
+		2:
+			loop_duration = 6.0
+			current_sequence = ["card_drop", "card_drop", "card_drop"]  # Conditional: if level/2 == 0: drop card
+		_:
+			loop_duration = 5.0
+			current_sequence = ["anvil_fall", "hole_appear", "hole_close"]
+
+func add_to_detected_sequence(event: String):
+	if not detected_sequence.has(event):
+		detected_sequence.append(event)
+		print("Detected event: ", event)
+		sequence_detected.emit(detected_sequence)
+
+func set_detected_sequence(sequence: Array):
+	detected_sequence = sequence.duplicate()
+	print("Sequence set: ", detected_sequence)
+
+func submit_sequence():
+	if detected_sequence == current_sequence:
+		print("Correct sequence submitted!")
+		level_completed.emit()
+		return true
+	else:
+		print("Incorrect sequence. Expected: ", current_sequence, " Got: ", detected_sequence)
+		detected_sequence.clear()
+		return false
+
+func break_loop():
+	if submit_sequence():
+		is_loop_active = false
+		loop_broken.emit()
+		return true
+	return false
+
+func reset_level():
+	detected_sequence.clear()
+	is_loop_active = true
+	loop_timer = 0.0

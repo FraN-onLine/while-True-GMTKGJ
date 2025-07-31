@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8yay203w4v5u"]
+
+[ext_resource type="Script" uid="uid://lxp65brsqtuc" path="res://scripts/code_editor.gd" id="1_editor"]
+
+[node name="CodeEditor" type="CanvasLayer"]
+script = ExtResource("1_editor")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 0.9)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/TitleContainer"]
+layout_mode = 2
+text = "Code Editor - Break the Loop"
+horizontal_alignment = 1
+
+[node name="HelpButton" type="Button" parent="VBoxContainer/TitleContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "?"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+split_offset = 300
+
+[node name="AvailableBlocks" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/AvailableBlocks"]
+layout_mode = 2
+text = "Available Blocks:"
+
+[node name="BlockList" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AvailableBlocks"]
+layout_mode = 2
+
+[node name="DropBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "drop()"
+
+[node name="HoleOpenBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "hole_open()"
+
+[node name="HoleCloseBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "hole_close()"
+
+[node name="WaitBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "wait()"
+
+[node name="IfBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "if:"
+
+[node name="CodeArea" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/CodeArea"]
+layout_mode = 2
+text = "Your Code:"
+
+[node name="CodeContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/CodeArea"]
+layout_mode = 2
+
+[node name="WhileTrueLabel" type="Label" parent="VBoxContainer/HSplitContainer/CodeArea/CodeContainer"]
+layout_mode = 2
+text = "while true:"
+
+[node name="CodeBlocks" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/CodeArea/CodeContainer"]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TestButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Test Code"
+
+[node name="BreakButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Break Loop"
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Close"
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Status: Ready to code"
+horizontal_alignment = 1

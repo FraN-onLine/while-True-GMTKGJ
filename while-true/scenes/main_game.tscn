@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqxvh8yqxqxqx"]
+
+[ext_resource type="Script" uid="uid://d1hc4t16g4pck" path="res://scripts/main_game.gd" id="1_0x8yq"]
+[ext_resource type="PackedScene" path="res://scenes/room.tscn" id="3_room"]
+[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="4_ui"]
+[ext_resource type="PackedScene" uid="uid://c8yay203w4v5u" path="res://scenes/code_editor.tscn" id="5_code_editor"]
+[ext_resource type="PackedScene" uid="uid://du6cgv51sqwd" path="res://scenes/player.tscn" id="5_ipu61"]
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource("1_0x8yq")
+
+[node name="Room" parent="." instance=ExtResource("3_room")]
+
+[node name="UI" parent="." instance=ExtResource("4_ui")]
+
+[node name="CodeEditor" parent="." instance=ExtResource("5_code_editor")]
+
+[node name="Player" parent="." instance=ExtResource("5_ipu61")]
+position = Vector2(415, 650)

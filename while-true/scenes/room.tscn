@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://room_scene"]
+
+[ext_resource type="Script" path="res://scripts/loop_manager.gd" id="1_loop_manager"]
+[ext_resource type="PackedScene" uid="uid://droppable_resource" path="res://scenes/droppable.tscn" id="2_droppable"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1200, 100)
+
+[node name="Room" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1200.0
+offset_bottom = 800.0
+color = Color(0.2, 0.2, 0.3, 1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(600, 750)
+
+[node name="FloorSprite" type="ColorRect" parent="Floor"]
+offset_left = -600.0
+offset_top = -50.0
+offset_right = 600.0
+offset_bottom = 50.0
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="LoopManager" type="Node2D" parent="."]
+script = ExtResource("1_loop_manager")
+
+[node name="Anvil" parent="LoopManager" instance=ExtResource("2_droppable")]
+position = Vector2(300, 100)
+
+[node name="Hole" type="Node2D" parent="LoopManager"]
+position = Vector2(600, 750)
+
+[node name="Sprite2D" type="ColorRect" parent="LoopManager/Hole"]
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+color = Color(0, 0, 0, 1)
+
+[node name="Instructions" type="Label" parent="."]
+position = Vector2(600, 50)
+text = "Level 1: Watch the anvil fall, hole appear, then hole close"
+horizontal_alignment = 1
+vertical_alignment = 1
+color = Color(1, 1, 1, 1) 
