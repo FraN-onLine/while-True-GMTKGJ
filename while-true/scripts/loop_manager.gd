@@ -1,15 +1,20 @@
 extends Node2D
 
 @onready var anvil = $Anvil
-@onready var hole = $Hole
+@onready var hole = $"../Hole"
 
 var current_event_index: int = 0
 var event_timer: float = 0.0
 var event_duration: float = 1.0  # Duration of each event
+var loop_counter: int = 1  # Hidden counter for loop iterations
 
 # Animation states
 var anvil_falling: bool = false
-var hole_visible: bool = false
+var card_falling: bool = false
+
+# Spawn points for cards
+var spawn_points: Array[Marker2D] = []
+var current_spawn_index: int = 0
 
 # Droppable resources
 var droppable_scene = preload("res://scenes/droppable.tscn")
@@ -35,27 +40,59 @@ func _process(delta):
 
 func play_next_event():
 	var event = Global.current_sequence[current_event_index]
+	print("Playing event: ", event, " at index: ", current_event_index, " loop: ", loop_counter)
 	
-	match event:
-		"anvil_fall":
-			play_anvil_fall()
-		"hole_appear":
-			play_hole_appear()
-		"hole_close":
-			play_hole_close()
-		"card_drop":
-			play_card_drop()
-		"light_on":
-			play_light_on()
-		"door_open":
-			play_door_open()
-		"ball_roll":
-			play_ball_roll()
-		"light_off":
-			play_light_off()
+	if Global.current_level == 2:
+		if event == "drop_card":
+			spawn_card()
+		elif event.begins_with("if__"):
+			# Evaluate the condition
+			if loop_counter % 2 == 0:
+				spawn_card()
+			current_event_index = (current_event_index + 1) % Global.current_sequence.size()
+			current_spawn_index = 0
+	else:
+		match event:
+			"anvil_drop":
+				play_anvil_fall()
+			"hole_appear":
+				play_hole_appear()
+			"hole_close":
+				play_hole_close()
+			_:
+				pass
 	
 	# Move to next event
 	current_event_index = (current_event_index + 1) % Global.current_sequence.size()
+	
+	# Increment loop counter when we complete a full sequence
+	if current_event_index == 0:
+		loop_counter += 1
+		print("Loop completed, counter: ", loop_counter)
+
+func evaluate_condition(condition: String) -> bool:
+	# Parse conditions like "LOOP_/2_==0" or "LOOP_>3"
+	print("condition...")
+	if condition.contains("=="):
+		var parts = condition.split("==")
+		var left = parts[0].replace("_", "")
+		var right = parts[1].replace("_", "")
+		
+		if left.contains("/"):
+			var div_parts = left.split("/")
+			var loop_val = loop_counter
+			var divisor = int(div_parts[1])
+			var result = loop_val / divisor
+			return result == int(right)
+	elif condition.contains(">"):
+		var parts = condition.split(">")
+		var left = parts[0].replace("_", "")
+		var right = parts[1].replace("_", "")
+		
+		if left == "LOOP":
+			return loop_counter > int(right)
+	
+	return false
 
 func play_anvil_fall():
 	print("Anvil falling!")
@@ -88,36 +125,48 @@ func setup_level_elements():
 			if anvil and anvil.has_method("setup_droppable"):
 				anvil.setup_droppable("anvil")
 		2:
-			# Level 2: Setup cards
-			var cards = get_children()
-			for card in cards:
-				if card.has_method("setup_droppable"):
-					card.setup_droppable("card")
+			# Level 2: Setup card spawn points only (cards are spawned dynamically)
+			spawn_points = [
+				get_node_or_null("CardDropRight"),
+				get_node_or_null("CardDropLeft"), 
+				get_node_or_null("CardDropCenter")
+			]
+			# Filter out null entries
+			spawn_points = spawn_points.filter(func(point): return point != null)
+			print("Found ", spawn_points.size(), " card spawn points")
+			# Reset spawn index
+			current_spawn_index = 0
 
-func play_card_drop():
-	print("Card dropping!")
+func spawn_card():
+	if spawn_points.size() == 0:
+		print("No spawn points found for cards!")
+		return
+
+	# Get current spawn point
+	var spawn_point = spawn_points[current_spawn_index]
+	print("Spawning card at spawn point ", current_spawn_index, " at position ", spawn_point.global_position)
+
+	# Create card droppable
+	var card = droppable_scene.instantiate()
+	card.global_position = spawn_point.global_position
+	card.direction = Vector2.DOWN
+	get_tree().current_scene.add_child(card)
+	card.setup_droppable("Card")
 	
-	# Find a card to animate
-	var cards = get_children()
-	for card in cards:
-		if card.has_method("get_resource_type") and card.get_resource_type() == "card":
-			# Animate card falling
-			var tween = create_tween()
-			tween.tween_property(card, "position:y", 650, 1.0)
-			tween.tween_callback(func(): 
-				card.position.y = 100  # Reset position
-			)
-			break
+
+	# Move to next spawn point for next card
+	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
 
 func play_hole_appear():
 	print("Hole appearing!")
-	hole_visible = true
-	hole.modulate.a = 1.0
+	hole.visible = false
+	$"../Hole/HoleShape".disabled = true
+	
 
 func play_hole_close():
 	print("Hole closing!")
-	hole_visible = false
-	hole.modulate.a = 0.0
+	hole.visible = true
+	$"../Hole/HoleShape".disabled = false
 
 func play_light_on():
 	print("Light turning on!")
@@ -141,15 +190,8 @@ func play_light_off():
 
 func _on_loop_broken():
 	# Stop all animations
-	anvil_falling = false
-	hole_visible = false
+	pass
 	
-	# Reset positions
-	anvil.position.y = 100
-	hole.modulate.a = 0.0
-	
-	# Reset background
-	get_parent().get_node("Room/Background").color = Color(0.2, 0.2, 0.3, 1)
 
 func _on_level_completed():
 	# Reset for next level

@@ -6,11 +6,15 @@ const JUMP_VELOCITY = -400.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var respawn_position := Vector2(415, 650)
+
 func _ready():
 	# Setup anvil as droppable if it exists
 	var anvil = get_parent().get_node("Room/LoopManager/Anvil")
 	if anvil and anvil.has_method("setup_droppable"):
 		anvil.setup_droppable("anvil")
+	respawn_position = position
+	
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -30,6 +34,10 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+	# Check for falling off the world
+	if position.y > 900:
+		respawn()
+	
 	# Handle menu input
 	handle_menu_input()
 
@@ -40,3 +48,11 @@ func handle_menu_input():
 func open_code_editor():
 	# Signal to main game to open code editor
 	get_parent().open_code_editor() 
+
+func _on_body_entered(body):
+	if body.name == "Hole" or body.name == "DeathZone":
+		respawn()
+
+func respawn():
+	position = respawn_position
+	velocity = Vector2.ZERO 

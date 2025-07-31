@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DroppableResource" load_steps=2 format=3 uid="uid://mt8w430mebf1"]
+
+[ext_resource type="Script" uid="uid://crm368njypl6a" path="res://resources/item.gd" id="1_item"]
+
+[resource]
+script = ExtResource("1_item")
+name = "card"
+color = Color(0.2, 0.8, 0.2, 1)
+size = Vector2(30, 20)
+label = "Card"

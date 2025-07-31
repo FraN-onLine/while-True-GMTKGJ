@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dhkv3bhgvjnj"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_loop_manager"]
-[ext_resource type="PackedScene" uid="uid://jlpkujhqdbs7" path="res://scenes/droppable.tscn" id="2_droppable"]
+[ext_resource type="PackedScene" path="res://scenes/droppable.tscn" id="2_droppable"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(646, 97)

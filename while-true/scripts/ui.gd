@@ -15,6 +15,7 @@ func update_level_display():
 
 func _on_loop_broken():
 	instructions.text = "Loop broken! Level complete!"
+	update_level_display()
 
 func _on_level_completed():
 	instructions.text = "Level " + str(Global.current_level) + " completed!"

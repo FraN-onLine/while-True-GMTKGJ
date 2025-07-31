@@ -11,6 +11,8 @@ func _ready():
 	Global.loop_broken.connect(_on_loop_broken)
 	Global.level_completed.connect(_on_level_completed)
 	
+	# Always load the current level to reset is_loop_active
+	Global.load_level(Global.current_level)
 	# Update UI
 	update_level_display()
 
@@ -22,12 +24,17 @@ func _on_loop_broken():
 
 func _on_level_completed():
 	# Load next level
+	Global.is_loop_active = true
 	Global.current_level += 1
 	Global.load_level(Global.current_level)
 	update_level_display()
 	
 	# Load appropriate room scene based on level
 	load_level_room()
+	# Respawn player
+	if player:
+		player.position = Vector2(415, 650)
+		player.velocity = Vector2.ZERO
 
 func update_level_display():
 	pass  # Handled by UI

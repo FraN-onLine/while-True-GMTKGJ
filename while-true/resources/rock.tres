@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://crm368njypl6a" path="res://resources/item.gd" id="1_item"]
+
+
+[resource]
+script = ExtResource("1_item")
+name = "rock"
+color = Color(0.6, 0.4, 0.2, 1)
+size = Vector2(35, 35)
+label = "Rock" 

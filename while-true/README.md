@@ -64,9 +64,10 @@ The game is easily configurable:
 - `current_sequence`: The expected sequence for each level
 - Add new levels by adding cases to the `load_level()` function
 
-### Droppable Types (droppable.gd):
-- Add new droppable types in the `droppable_types` dictionary
-- Each type has: color, size, and label properties
+### Droppable Resources (resources/):
+- Each droppable type has its own `.tres` resource file
+- Configure name, color, size, and label properties
+- Add new droppable types by creating new resource files
 
 ### Code Blocks (code_editor.gd):
 - Add new function blocks in `available_blocks`
@@ -96,6 +97,14 @@ The game is easily configurable:
 - `scenes/ui.tscn`: Game UI elements
 - `scenes/code_editor.tscn`: Code editor interface
 - `scenes/droppable.tscn`: Reusable droppable resource
+
+### Resources:
+- `resources/droppable_resource.gd`: Base class for droppable resources
+- `resources/anvil.tres`: Anvil droppable configuration
+- `resources/card.tres`: Card droppable configuration
+- `resources/snake.tres`: Snake droppable configuration
+- `resources/ball.tres`: Ball droppable configuration
+- `resources/rock.tres`: Rock droppable configuration
 
 ## Developer Guide - Extending the Game
 
@@ -139,14 +148,19 @@ The game is easily configurable:
 
 ### Adding New Droppable Types
 
-1. **Update `droppable.gd`:**
+1. **Create new resource file:**
    ```gdscript
-   # In droppable_types dictionary:
-   "gem": {
-       "color": Color(0.8, 0.2, 0.8, 1),
-       "size": Vector2(25, 25),
-       "label": "Gem"
-   }
+   # Create resources/gem.tres:
+   [gd_resource type="Resource" script_class="DroppableResource" load_steps=2 format=3]
+   
+   [ext_resource type="Script" path="res://resources/droppable_resource.gd" id="1_droppable"]
+   
+   [resource]
+   script = ExtResource("1_droppable")
+   name = "gem"
+   color = Color(0.8, 0.2, 0.8, 1)
+   size = Vector2(25, 25)
+   label = "Gem"
    ```
 
 2. **Update `code_editor.gd`:**
@@ -199,6 +213,13 @@ while-true/
 │   ├── code_editor.tscn     # Code editor interface
 │   ├── droppable.tscn       # Reusable droppable
 │   └── title_screen.tscn    # Title screen
+├── resources/
+│   ├── droppable_resource.gd # Base droppable resource class
+│   ├── anvil.tres           # Anvil configuration
+│   ├── card.tres            # Card configuration
+│   ├── snake.tres           # Snake configuration
+│   ├── ball.tres            # Ball configuration
+│   └── rock.tres            # Rock configuration
 └── project.godot            # Project configuration
 ```
 
@@ -207,7 +228,7 @@ while-true/
 - **Input Controls**: `project.godot` → `[input]` section
 - **Level Sequences**: `global.gd` → `load_level()` function
 - **Code Blocks**: `code_editor.gd` → `available_blocks` dictionary
-- **Droppable Types**: `droppable.gd` → `droppable_types` dictionary
+- **Droppable Resources**: `resources/` folder → individual `.tres` files
 - **Room Scenes**: Create new `.tscn` files for each level
 
 ### Testing New Features
@@ -216,6 +237,21 @@ while-true/
 2. **Test Code Editor**: Verify new blocks work and convert properly
 3. **Test Visual Elements**: Check animations and UI updates
 4. **Test Game Flow**: Complete full level cycle
+
+## Recent Fixes
+
+### Code Editor UI Issues Fixed:
+- Added missing `ui_cancel` input action for ESC key
+- Fixed button signal connections and input handling
+- Added debug prints to track button interactions
+- Improved dragging functionality for code blocks
+- Enhanced resource system for droppable configuration
+
+### Droppable Resource System:
+- Created `DroppableResource` class for configurable droppables
+- Added individual `.tres` files for each droppable type
+- Updated `droppable.gd` to use resource system
+- Made texture, name, color, size, and label easily editable
 
 ## Future Features
 

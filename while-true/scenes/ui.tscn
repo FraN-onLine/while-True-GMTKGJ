@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ui_scene"]
+[gd_scene load_steps=2 format=3 uid="uid://rkeyx6m6kl68"]
 
-[ext_resource type="Script" path="res://scripts/ui.gd" id="1_ui"]
+[ext_resource type="Script" uid="uid://ssars4vf8ve5" path="res://scripts/ui.gd" id="1_ui"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ui")
@@ -26,5 +26,3 @@ offset_right = 200.0
 offset_bottom = 46.0
 text = "Press ESC to open code editor!"
 horizontal_alignment = 1
-
- 

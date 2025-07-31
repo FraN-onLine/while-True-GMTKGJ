@@ -10,11 +10,12 @@ extends CanvasLayer
 
 var current_code: Array = []
 var available_blocks = {
-	"drop()": {"type": "function", "params": ["anvil", "snake", "ball", "rock", "card"]},
+	"drop()": {"type": "function", "params": []},
+	"flash()": {"type": "function", "params": []},
 	"hole_open()": {"type": "function", "params": []},
 	"hole_close()": {"type": "function", "params": []},
 	"wait()": {"type": "function", "params": ["1", "2", "3"]},
-	"if:": {"type": "conditional", "params": ["level / 2 == 0", "level > 2"]}
+	"if:": {"type": "conditional", "params": ["loop / 2 == 0", "loop > 2"]}
 }
 
 # Dragging variables
@@ -59,15 +60,10 @@ var drag_offset = Vector2.ZERO
 # 
 # HOW TO ADD NEW DROPPABLE TYPES:
 # 
-# 1. UPDATE droppable.gd:
-#    - Add new type in droppable_types dictionary
-#    - Set color, size, and label properties
-#    - Example:
-#      "gem": {
-#          "color": Color(0.8, 0.2, 0.8, 1),
-#          "size": Vector2(25, 25),
-#          "label": "Gem"
-#      }
+# 1. CREATE NEW RESOURCE:
+#    - Create new .tres file in resources/ folder
+#    - Set name, color, size, and label properties
+#    - Example: resources/gem.tres
 # 
 # 2. UPDATE code_editor.gd:
 #    - Add "gem" to drop() parameters in available_blocks
@@ -129,6 +125,7 @@ func _input(event):
 	# Handle ESC key to close editor
 	if event.is_action_pressed("ui_cancel"):
 		close_editor()
+		get_viewport().set_input_as_handled()
 		return
 	
 	# Handle dragging
@@ -142,9 +139,11 @@ func _input(event):
 		update_drag(event.global_position)
 
 func _on_block_pressed(block_name: String):
+	print("Block pressed: ", block_name)  # Debug print
 	add_code_block(block_name)
 
 func add_code_block(block_name: String):
+	print("Adding code block: ", block_name)  # Debug print
 	var block_data = available_blocks[block_name]
 	
 	if block_data.type == "conditional":
@@ -153,46 +152,49 @@ func add_code_block(block_name: String):
 		add_function_block(block_name, block_data)
 
 func add_function_block(block_name: String, block_data: Dictionary):
-	# Create a new code block container with visual styling
 	var block_container = PanelContainer.new()
 	block_container.add_theme_stylebox_override("panel", create_block_style())
-	
+
 	var inner_container = HBoxContainer.new()
 	inner_container.add_theme_constant_override("separation", 5)
 	block_container.add_child(inner_container)
-	
-	# Create the function name label
+
 	var func_label = Label.new()
 	func_label.text = block_name.split("(")[0] + "("
 	func_label.add_theme_color_override("font_color", Color(0.8, 0.6, 0.2, 1))
 	inner_container.add_child(func_label)
-	
-	# Create parameter input if needed
-	if block_data.params.size() > 0:
-		var param_input = LineEdit.new()
-		param_input.placeholder_text = "parameter"
-		param_input.text = block_data.params[0]
-		param_input.custom_minimum_size.x = 100
-		param_input.add_theme_stylebox_override("normal", create_input_style())
-		inner_container.add_child(param_input)
-	
-	# Close parenthesis
+
+	# For drop() and flash(), use OptionButton for item selection
+	if block_name in ["drop()", "flash()"]:
+		var option_button = OptionButton.new()
+		var allowed = Global.allowed_items if Global.allowed_items.size() > 0 else null
+		var dir = DirAccess.open("res://resources/")
+		for item in Global.allowed_items:
+			option_button.add_item(item)
+		inner_container.add_child(option_button)
+	else:
+		if block_data.params.size() > 0:
+			var param_input = LineEdit.new()
+			param_input.placeholder_text = "parameter"
+			param_input.text = block_data.params[0]
+			param_input.custom_minimum_size.x = 100
+			param_input.add_theme_stylebox_override("normal", create_input_style())
+			inner_container.add_child(param_input)
+
 	var close_label = Label.new()
 	close_label.text = ")"
 	close_label.add_theme_color_override("font_color", Color(0.8, 0.6, 0.2, 1))
 	inner_container.add_child(close_label)
-	
-	# Remove button
+
 	var remove_button = Button.new()
 	remove_button.text = "×"
 	remove_button.custom_minimum_size.x = 30
 	remove_button.add_theme_stylebox_override("normal", create_button_style())
 	remove_button.pressed.connect(_on_remove_block.bind(block_container))
 	inner_container.add_child(remove_button)
-	
-	# Make block draggable
+
 	make_draggable(block_container)
-	
+
 	code_blocks.add_child(block_container)
 	current_code.append({"type": block_name, "container": block_container})
 
@@ -213,13 +215,21 @@ func add_conditional_block(block_name: String, block_data: Dictionary):
 	if_label.add_theme_color_override("font_color", Color(0.2, 0.8, 0.8, 1))
 	if_container.add_child(if_label)
 	
-	# Create condition input
-	var condition_input = LineEdit.new()
-	condition_input.placeholder_text = "condition"
-	condition_input.text = block_data.params[0]
-	condition_input.custom_minimum_size.x = 150
-	condition_input.add_theme_stylebox_override("normal", create_input_style())
-	if_container.add_child(condition_input)
+	# Create condition type dropdown
+	var condition_type_dropdown = OptionButton.new()
+	condition_type_dropdown.add_item("loop > n")
+	condition_type_dropdown.add_item("loop % n == 0")
+	condition_type_dropdown.selected = 0  # Default to loop > n
+	condition_type_dropdown.custom_minimum_size.x = 120
+	if_container.add_child(condition_type_dropdown)
+	
+	# Create number input for n
+	var number_input = LineEdit.new()
+	number_input.placeholder_text = "2"
+	number_input.text = "2"
+	number_input.custom_minimum_size.x = 50
+	number_input.add_theme_stylebox_override("normal", create_input_style())
+	if_container.add_child(number_input)
 	
 	var colon_label = Label.new()
 	colon_label.text = ":"
@@ -253,7 +263,7 @@ func add_conditional_block(block_name: String, block_data: Dictionary):
 	make_draggable(conditional_container)
 	
 	code_blocks.add_child(conditional_container)
-	current_code.append({"type": block_name, "container": conditional_container, "content": content_container})
+	current_code.append({"type": block_name, "container": conditional_container, "content": content_container, "condition_type": condition_type_dropdown, "number_input": number_input})
 
 func _on_add_content_pressed(content_container: VBoxContainer):
 	# Create a simple drop block inside the conditional
@@ -302,12 +312,7 @@ func _on_remove_block(block_container: Control):
 
 func _on_test_pressed():
 	var code_sequence = get_code_sequence()
-	status_label.text = "Testing code: " + str(code_sequence)
-	
-	# Convert code to expected sequence format
 	var converted_sequence = convert_code_to_sequence(code_sequence)
-	
-	# Test against current level sequence
 	if converted_sequence == Global.current_sequence:
 		status_label.text = "Code is correct! Press 'Break Loop' to complete the level."
 		break_button.disabled = false
@@ -321,48 +326,66 @@ func get_code_sequence() -> Array:
 		var block_text = block_data.type
 		var container = block_data.container
 		
-		# Get parameter if it exists
-		for child in container.get_children():
-			if child is LineEdit:
-				block_text = block_text.split("(")[0] + "(" + child.text + ")"
-				break
-		
-		sequence.append(block_text)
+		if block_data.type == "if:":
+			# Handle if block - get condition from dropdown and number input
+			var condition_type = block_data.condition_type.get_item_text(block_data.condition_type.selected)
+			var number = block_data.number_input.text
+			block_text = "if " + condition_type.replace("n", number) + ":"
+			sequence.append(block_text)
+			
+			# Add contents of the if block
+			for content_block in block_data.content.get_children():
+				if content_block is PanelContainer:
+					# This is a drop block inside the if
+					sequence.append("drop(card)")
+		else:
+			# Handle regular blocks
+			for child in container.get_children():
+				if child is HBoxContainer:
+					for subchild in child.get_children():
+						if subchild is OptionButton:
+							block_text = block_text.split("(")[0] + "(" + subchild.get_item_text(subchild.selected) + ")"
+							break
+						elif subchild is LineEdit:
+							block_text = block_text.split("(")[0] + "(" + subchild.text + ")"
+							break
+					break
+			sequence.append(block_text)
 	return sequence
 
 func convert_code_to_sequence(code_sequence: Array) -> Array:
 	var converted = []
-	for code in code_sequence:
-		if code.begins_with("drop("):
-			var param = code.split("(")[1].split(")")[0]
-			if param == "anvil":
-				converted.append("anvil_fall")
-			elif param == "snake":
-				converted.append("snake_drop")
-			elif param == "ball":
-				converted.append("ball_drop")
-			elif param == "rock":
-				converted.append("rock_drop")
-			elif param == "card":
-				converted.append("card_drop")
-		elif code == "hole_open()":
-			converted.append("hole_appear")
-		elif code == "hole_close()":
-			converted.append("hole_close")
-		elif code.begins_with("wait("):
-			converted.append("wait")
-		elif code.begins_with("if "):
-			# Handle conditional logic
-			var condition = code.split("if ")[1].split(":")[0]
-			if condition == "level / 2 == 0":
-				converted.append("card_drop")  # Conditional card drop
-	
+	if Global.current_level == 2:
+		for code in code_sequence:
+			if code.begins_with("drop("):
+				converted.append("drop_card")
+			elif code.begins_with("if "):
+				# Extract condition and normalize
+				var condition = code.substr(3, code.find(":") - 3).strip_edges().replace(" ", "_").replace("/", "_/").replace("==", "==").replace(">", ">")
+				converted.append("if__" + condition)
+				# The if block contents (drop(card)) will be added in the next iteration
+			elif code == "hole_open()":
+				converted.append("hole_appear")
+			elif code == "hole_close()":
+				converted.append("hole_close")
+			elif code.begins_with("wait("):
+				converted.append("wait")
+	else:
+		for code in code_sequence:
+			if code.begins_with("drop("):
+				var param = code.split("(")[1].split(")")[0]
+				converted.append(param + "_drop")
+			elif code == "hole_open()":
+				converted.append("hole_appear")
+			elif code == "hole_close()":
+				converted.append("hole_close")
+			elif code.begins_with("wait("):
+				converted.append("wait")
 	return converted
 
 func _on_break_pressed():
 	var code_sequence = get_code_sequence()
 	var converted_sequence = convert_code_to_sequence(code_sequence)
-	
 	if converted_sequence == Global.current_sequence:
 		Global.detected_sequence = converted_sequence
 		if Global.break_loop():
@@ -375,9 +398,11 @@ func _on_break_pressed():
 		status_label.text = "Incorrect sequence. Test your code first."
 
 func _on_close_pressed():
+	print("Close button pressed")  # Debug print
 	close_editor()
 
 func _on_help_pressed():
+	print("Help button pressed")  # Debug print
 	show_help_dialog()
 
 func show_help_dialog():
@@ -429,10 +454,12 @@ func show_help_dialog():
 	dialog.popup_centered()
 
 func close_editor():
+	print("Closing editor")  # Debug print
 	visible = false
 	get_tree().paused = false
 
 func open_editor():
+	print("Opening editor")  # Debug print
 	visible = true
 	get_tree().paused = true
 	status_label.text = "Status: Ready to code"
