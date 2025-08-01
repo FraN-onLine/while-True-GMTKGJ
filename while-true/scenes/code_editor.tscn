@@ -76,6 +76,10 @@ text = "wait()"
 layout_mode = 2
 text = "if:"
 
+[node name="RiseBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "rise()"
+
 [node name="CodeArea" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
 layout_mode = 2
 

@@ -8,7 +8,7 @@ var is_loop_active: bool = true
 var loop_timer: float = 0.0
 var loop_duration: float = 5.0  # Default loop duration in seconds
 var allowed_items : Array = []
-var rise_unlockrf: bool = false
+var rise_unlocked: bool = false
 
 # Signal for when a sequence is detected
 signal sequence_detected(sequence: Array)
@@ -34,11 +34,13 @@ func load_level(level_number: int):
 			allowed_items = ["rock", "anvil"]
 		2:
 			loop_duration = 6.0
-			current_sequence = ["drop_card", "drop_card", "if__loop_%_2_==_0", "drop_card"]
+			current_sequence = ["card_drop", "card_drop", "if__loop_%_2_==_0", "card_drop"]
 			allowed_items = ["card"]
 		3:
-			loop_duration = 4.0
-			current_sequence = ["hole_appear","if__loop_%_3_==_0", "rise_virus", "rise_virus", "hole_close"]
+			loop_duration = 5.0
+			current_sequence = ["hole_appear", "if__loop_%_3_==_0", "virus_rise", "virus_rise", "hole_close"]
+			allowed_items = ["card", "virus"]
+			
 		_:
 			loop_duration = 5.0
 			current_sequence = ["anvil_drop", "hole_appear", "hole_close"]

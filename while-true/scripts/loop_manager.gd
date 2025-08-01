@@ -5,7 +5,7 @@ extends Node2D
 
 var current_event_index: int = 0
 var event_timer: float = 0.0
-var event_duration: float = 1.0  # Duration of each event
+var event_duration: float = 1.1  # Duration of each event
 var loop_counter: int = 1  # Hidden counter for loop iterations
 
 # Animation states
@@ -18,6 +18,7 @@ var current_spawn_index: int = 0
 
 # Droppable resources
 var droppable_scene = preload("res://scenes/droppable.tscn")
+var riseable_scene = preload("res://scenes/riseable.tscn")
 
 func _ready():
 	# Connect to global signals
@@ -43,7 +44,7 @@ func play_next_event():
 	print("Playing event: ", event, " at index: ", current_event_index, " loop: ", loop_counter)
 	
 	if Global.current_level == 2:
-		if event == "drop_card":
+		if event == "card_drop":
 			spawn_card()
 		elif event.begins_with("if__"):
 			# Evaluate the condition
@@ -59,8 +60,17 @@ func play_next_event():
 				play_hole_appear()
 			"hole_close":
 				play_hole_close()
+			"virus_rise":
+				play_virus_rise()
 			_:
-				pass
+				if Global.current_level == 3:
+					if event.begins_with("if__"):
+						if loop_counter % 3 == 0:
+							play_virus_rise()
+						else:
+							current_spawn_index = 1
+					current_event_index = (current_event_index + 1) % Global.current_sequence.size()
+			
 	
 	# Move to next event
 	current_event_index = (current_event_index + 1) % Global.current_sequence.size()
@@ -136,6 +146,13 @@ func setup_level_elements():
 			print("Found ", spawn_points.size(), " card spawn points")
 			# Reset spawn index
 			current_spawn_index = 0
+		3:
+			# Level 3: Setup hole and virus rise
+			spawn_points = [
+				get_node_or_null("Rise1"),
+				get_node_or_null("Rise2")
+			]
+			current_spawn_index = 0
 
 func spawn_card():
 	if spawn_points.size() == 0:
@@ -152,9 +169,23 @@ func spawn_card():
 	card.direction = Vector2.DOWN
 	get_tree().current_scene.add_child(card)
 	card.setup_droppable("Card")
-	
-
 	# Move to next spawn point for next card
+	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
+
+func play_virus_rise():
+	print("Virus rising!")
+	# This would be implemented with actual virus sprites
+	if spawn_points.size() == 0:
+		print("No spawn points for virus rise!")
+		return
+	var spawn_point = spawn_points[current_spawn_index]
+	print("Spawning virus at spawn point ", current_spawn_index, " at position ", spawn_point.global_position)
+
+	var riseable = riseable_scene.instantiate()
+	riseable.global_position = spawn_point.global_position
+	riseable.direction = Vector2.UP
+	get_tree().current_scene.add_child(riseable)
+	riseable.setup_riseable("virus")
 	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
 
 func play_hole_appear():
@@ -194,7 +225,10 @@ func _on_loop_broken():
 	
 
 func _on_level_completed():
-	# Reset for next level
+	loop_counter = 1
+	if Global.current_level == 2:
+		if get_node("card"):
+			get_node("card").queue_free()
 	current_event_index = 0
 	event_timer = 0.0
 	_on_loop_broken() 

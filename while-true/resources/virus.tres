@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://fpfs3vbu5a40"]
+
+[ext_resource type="Script" uid="uid://crm368njypl6a" path="res://resources/item.gd" id="1_ewi7a"]
+
+[resource]
+script = ExtResource("1_ewi7a")
+name = "virus"
+color = Color(0.830968, 0.481304, 0.717409, 1)
+size = Vector2(50, 50)
+label = "Virus"
+metadata/_custom_type_script = "uid://crm368njypl6a"

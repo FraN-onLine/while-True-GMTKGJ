@@ -23,7 +23,11 @@ Global="*res://global.gd"
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
-window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[global_group]
+
+Player=""
 
 [input]
 
@@ -52,4 +56,5 @@ jump={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

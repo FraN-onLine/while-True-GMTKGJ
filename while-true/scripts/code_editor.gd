@@ -360,10 +360,14 @@ func get_code_sequence() -> Array:
 
 func convert_code_to_sequence(code_sequence: Array) -> Array:
 	var converted = []
-	if Global.current_level == 2:
+	if Global.current_level >= 2:
 		for code in code_sequence:
 			if code.begins_with("drop("):
-				converted.append("drop_card")
+				var param = code.split("(")[1].split(")")[0]
+				converted.append(param + "_drop")
+			elif code.begins_with("rise("):
+				var param = code.split("(")[1].split(")")[0]
+				converted.append(param + "_rise")
 			elif code.begins_with("if "):
 				# Extract condition and normalize
 				var condition = code.substr(3, code.find(":") - 3).strip_edges().replace(" ", "_").replace("/", "_/").replace("==", "==").replace(">", ">")

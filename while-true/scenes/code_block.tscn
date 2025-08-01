@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://1go58hnlql6q"]
+
+[ext_resource type="Script" uid="uid://df63wtgq8mowi" path="res://scripts/code_block.gd" id="1_oa330"]
+[ext_resource type="Texture2D" uid="uid://b3c1abapqvilk" path="res://Assets/Code-Block-Sheet.png" id="1_umb4q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oa330"]
+radius = 28.0713
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5smj0"]
+atlas = ExtResource("1_umb4q")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lb108"]
+atlas = ExtResource("1_umb4q")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wxj4g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5smj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lb108")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Code_Block" type="Area2D"]
+script = ExtResource("1_oa330")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oa330")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(2.40625, 2.4375)
+sprite_frames = SubResource("SpriteFrames_wxj4g")
+autoplay = "default"
+frame_progress = 0.785669

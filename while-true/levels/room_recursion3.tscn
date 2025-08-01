@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://rxnb6y62m4ai"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_nr85e"]
-[ext_resource type="PackedScene" uid="uid://jlpkujhqdbs7" path="res://scenes/droppable.tscn" id="2_1sil0"]
+[ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="3_1sil0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(598, 92.5)
@@ -118,8 +118,11 @@ shape = SubResource("RectangleShape2D_death")
 [node name="LoopManager" type="Node2D" parent="."]
 script = ExtResource("1_nr85e")
 
-[node name="Anvil" parent="LoopManager" instance=ExtResource("2_1sil0")]
-position = Vector2(300, 100)
+[node name="Rise1" type="Marker2D" parent="LoopManager"]
+position = Vector2(102, 748)
+
+[node name="Rise2" type="Marker2D" parent="LoopManager"]
+position = Vector2(808, 750)
 
 [node name="Instructions" type="Label" parent="."]
 offset_left = 600.0
@@ -208,3 +211,6 @@ color = Color(0.301961, 0.105882, 0.133333, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D5"]
 position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="Code_Block" parent="." instance=ExtResource("3_1sil0")]
+position = Vector2(87, 312)

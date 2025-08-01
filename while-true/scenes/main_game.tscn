@@ -14,6 +14,7 @@ script = ExtResource("1_0x8yq")
 [node name="UI" parent="." instance=ExtResource("4_ui")]
 
 [node name="CodeEditor" parent="." instance=ExtResource("5_code_editor")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("5_ipu61")]
 position = Vector2(415, 650)

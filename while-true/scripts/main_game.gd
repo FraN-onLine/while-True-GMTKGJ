@@ -56,8 +56,11 @@ func load_level_room():
 			room_scene_path = "res://levels/room_recursion1.tscn"
 		2:
 			room_scene_path = "res://levels/room_recursion2.tscn"
-		_:
+		3:
 			room_scene_path = "res://levels/room_recursion3.tscn"
+		#add here for more rooms
+		_:
+			room_scene_path = "res://levels/room_recursion1.tscn"
 	
 	# Load and add new room
 	var room_scene = load(room_scene_path)
