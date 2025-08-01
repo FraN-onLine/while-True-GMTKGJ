@@ -7,10 +7,12 @@ extends CanvasLayer
 @onready var close_button = $VBoxContainer/Buttons/CloseButton
 @onready var help_button = $VBoxContainer/TitleContainer/HelpButton
 @onready var status_label = $VBoxContainer/StatusLabel
+const MAX_BLOCK_COUNT := 8
 
 var current_code: Array = []
 var available_blocks = {
 	"drop()": {"type": "function", "params": []},
+	"rise()": {"type": "function", "params": []},
 	"flash()": {"type": "function", "params": []},
 	"hole_open()": {"type": "function", "params": []},
 	"hole_close()": {"type": "function", "params": []},
@@ -143,6 +145,9 @@ func _on_block_pressed(block_name: String):
 	add_code_block(block_name)
 
 func add_code_block(block_name: String):
+	if get_current_block_count() >= MAX_BLOCK_COUNT:
+		status_label.text = "Maximum block count reached (" + str(MAX_BLOCK_COUNT) + "). Remove a block to add more."
+		return
 	print("Adding code block: ", block_name)  # Debug print
 	var block_data = available_blocks[block_name]
 	
@@ -165,7 +170,7 @@ func add_function_block(block_name: String, block_data: Dictionary):
 	inner_container.add_child(func_label)
 
 	# For drop() and flash(), use OptionButton for item selection
-	if block_name in ["drop()", "flash()"]:
+	if block_name in ["drop()", "rise()"]:
 		var option_button = OptionButton.new()
 		var allowed = Global.allowed_items if Global.allowed_items.size() > 0 else null
 		var dir = DirAccess.open("res://resources/")
@@ -250,13 +255,6 @@ func add_conditional_block(block_name: String, block_data: Dictionary):
 	var content_container = VBoxContainer.new()
 	content_container.offset_left = 20.0
 	
-	# Add a button to add content inside the if block
-	var add_content_button = Button.new()
-	add_content_button.text = "+ Add content"
-	add_content_button.add_theme_stylebox_override("normal", create_button_style())
-	add_content_button.pressed.connect(_on_add_content_pressed.bind(content_container))
-	content_container.add_child(add_content_button)
-	
 	inner_container.add_child(content_container)
 	
 	# Make block draggable
@@ -266,6 +264,13 @@ func add_conditional_block(block_name: String, block_data: Dictionary):
 	current_code.append({"type": block_name, "container": conditional_container, "content": content_container, "condition_type": condition_type_dropdown, "number_input": number_input})
 
 func _on_add_content_pressed(content_container: VBoxContainer):
+	# Check if we can add more blocks
+	if get_current_block_count() >= MAX_BLOCK_COUNT:
+		status_label.text = "Maximum block count reached (" + str(MAX_BLOCK_COUNT) + ").
+		 Remove a block to add more."
+		return
+
+
 	# Create a simple drop block inside the conditional
 	var drop_container = PanelContainer.new()
 	drop_container.add_theme_stylebox_override("panel", create_block_style())
@@ -482,7 +487,8 @@ func update_available_blocks():
 					child.visible = true  # Always show for Level 1
 				"wait()", "if:":
 					child.visible = (Global.current_level >= 2)  # Only show for Level 2+
-
+				"rise()":
+					child.visible = Global.rise_unlocked
 # Styling functions
 func create_block_style() -> StyleBoxFlat:
 	var style = StyleBoxFlat.new()
@@ -574,3 +580,14 @@ func end_drag():
 		dragged_block.modulate = Color(1, 1, 1, 1)  # Restore opacity
 		dragged_block = null
 		dragging = false 
+
+func get_current_block_count() -> int:
+	var count = 0
+	for block_data in current_code:
+		if block_data.type == "if:":
+			count += 1
+			# Count the inner blocks
+			count += block_data.content.get_child_count()
+		else:
+			count += 1
+	return count

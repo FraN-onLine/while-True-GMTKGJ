@@ -11,7 +11,7 @@ func _ready():
 	update_level_display()
 
 func update_level_display():
-	level_label.text = "Level " + str(Global.current_level)
+	level_label.text = "Recursion " + str(Global.current_level)
 
 func _on_loop_broken():
 	instructions.text = "Loop broken! Level complete!"

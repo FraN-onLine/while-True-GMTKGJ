@@ -47,15 +47,17 @@ func load_level_room():
 	if room:
 		room.queue_free()
 	
+	code_editor.visible = false
+	get_tree().paused = false
 	# Load appropriate room based on level
 	var room_scene_path = ""
 	match Global.current_level:
 		1:
-			room_scene_path = "res://levels/room.tscn"
+			room_scene_path = "res://levels/room_recursion1.tscn"
 		2:
-			room_scene_path = "res://scenes/room_level2.tscn"
+			room_scene_path = "res://levels/room_recursion2.tscn"
 		_:
-			room_scene_path = "res://scenes/room.tscn"
+			room_scene_path = "res://levels/room_recursion3.tscn"
 	
 	# Load and add new room
 	var room_scene = load(room_scene_path)

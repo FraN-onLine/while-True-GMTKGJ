@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://jlpkujhqdbs7" path="res://scenes/droppable.tscn" id="2_droppable"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
-size = Vector2(646, 97)
+size = Vector2(648, 97)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85yof"]
 size = Vector2(438, 97)
@@ -21,7 +21,6 @@ size = Vector2(1200, 50)
 [node name="Room" type="Node2D"]
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 offset_right = 1200.0
 offset_bottom = 800.0
 color = Color(0.2, 0.2, 0.3, 1)
@@ -30,7 +29,7 @@ color = Color(0.2, 0.2, 0.3, 1)
 position = Vector2(350, 750)
 
 [node name="FloorLeftShape" type="CollisionShape2D" parent="FloorLeft"]
-position = Vector2(-75, 0.5)
+position = Vector2(-74, -2)
 shape = SubResource("RectangleShape2D_ffxv4")
 
 [node name="FloorLeftSprite" type="ColorRect" parent="FloorLeft"]
@@ -59,7 +58,7 @@ metadata/_edit_lock_ = true
 position = Vector2(850, 750)
 
 [node name="HoleShape" type="CollisionShape2D" parent="Hole"]
-position = Vector2(-175, 0)
+position = Vector2(-175, -2)
 shape = SubResource("RectangleShape2D_floor")
 
 [node name="HoleSprite" type="ColorRect" parent="Hole"]
@@ -128,3 +127,10 @@ offset_bottom = 50.0
 text = "Level 1: Watch the anvil fall, hole appear, then hole close"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 60.0
+offset_top = 407.0
+offset_right = 387.0
+offset_bottom = 539.0
+text = "Everything in this world runs on a loop... record what happens and break the cycle..."
