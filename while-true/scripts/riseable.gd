@@ -19,8 +19,6 @@ func setup_riseable(type: String):
 		queue_free()
 		return
 
-	# Apply visuals and metadata
-	#sprite.texture = data.texture
 	sprite.color = data.color
 	label.text = data.label
 

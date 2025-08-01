@@ -1,22 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8yay203w4v5u"]
+[gd_scene load_steps=3 format=3 uid="uid://c8yay203w4v5u"]
 
 [ext_resource type="Script" uid="uid://lxp65brsqtuc" path="res://scripts/code_editor.gd" id="1_editor"]
+[ext_resource type="Texture2D" uid="uid://4k51dhusi0d4" path="res://Assets/Compiler.png" id="2_i4sis"]
 
 [node name="CodeEditor" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_editor")
 
-[node name="Background" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 61.0
-offset_top = 44.0
-offset_right = -54.0
-offset_bottom = -36.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.1, 0.1, 0.15, 0.9)
+[node name="Compiler" type="Sprite2D" parent="."]
+position = Vector2(608, 405)
+scale = Vector2(9.77865, 7.73958)
+texture = ExtResource("2_i4sis")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
@@ -92,7 +86,7 @@ layout_mode = 2
 
 [node name="WhileTrueLabel" type="Label" parent="VBoxContainer/HSplitContainer/CodeArea/CodeContainer"]
 layout_mode = 2
-text = "while true:"
+text = "While True:"
 
 [node name="CodeBlocks" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/CodeArea/CodeContainer"]
 layout_mode = 2
