@@ -51,7 +51,7 @@ func load_level_room():
 	var room_scene_path = ""
 	match Global.current_level:
 		1:
-			room_scene_path = "res://scenes/room.tscn"
+			room_scene_path = "res://levels/room.tscn"
 		2:
 			room_scene_path = "res://scenes/room_level2.tscn"
 		_:

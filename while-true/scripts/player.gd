@@ -10,9 +10,6 @@ var respawn_position := Vector2(415, 650)
 
 func _ready():
 	# Setup anvil as droppable if it exists
-	var anvil = get_parent().get_node("Room/LoopManager/Anvil")
-	if anvil and anvil.has_method("setup_droppable"):
-		anvil.setup_droppable("anvil")
 	respawn_position = position
 	
 
