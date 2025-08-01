@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var test_button = $VBoxContainer/Buttons/TestButton
 @onready var break_button = $VBoxContainer/Buttons/BreakButton
 @onready var close_button = $VBoxContainer/Buttons/CloseButton
-@onready var help_button = $VBoxContainer/TitleContainer/HelpButton
+@onready var help_button = $VBoxContainer/Buttons/HelpButton
 @onready var status_label = $VBoxContainer/StatusLabel
 const MAX_BLOCK_COUNT := 8
 

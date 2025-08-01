@@ -23,19 +23,6 @@ offset_top = -300.0
 offset_right = 400.0
 offset_bottom = 300.0
 
-[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="VBoxContainer/TitleContainer"]
-layout_mode = 2
-text = "Code Editor - Break the Loop"
-horizontal_alignment = 1
-
-[node name="HelpButton" type="Button" parent="VBoxContainer/TitleContainer"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-text = "?"
-
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
 split_offset = 300
@@ -105,6 +92,11 @@ text = "Break Loop"
 [node name="CloseButton" type="Button" parent="VBoxContainer/Buttons"]
 layout_mode = 2
 text = "Close"
+
+[node name="HelpButton" type="Button" parent="VBoxContainer/Buttons"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "?"
 
 [node name="StatusLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
