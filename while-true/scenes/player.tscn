@@ -19,4 +19,4 @@ offset_bottom = 20.0
 color = Color(0.8, 0.6, 0.4, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_bottom = 850
+limit_bottom = 820
