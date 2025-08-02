@@ -235,7 +235,6 @@ shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(331, -391)
-metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
 offset_left = 513.0
@@ -244,12 +243,10 @@ offset_right = 602.0
 offset_bottom = 995.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D5"]
 position = Vector2(558, 954)
 shape = SubResource("RectangleShape2D_nr85e")
-metadata/_edit_lock_ = true
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(31, -425)

@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dae8axo6h16u8"]
+[gd_scene load_steps=19 format=3 uid="uid://dae8axo6h16u8"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_t8fns"]
+[ext_resource type="Texture2D" uid="uid://c3t0h7wmy85d7" path="res://Assets/Hello-World.png" id="2_d65cg"]
+[ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="3_gmlmv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(1087, 92.5)
@@ -9,25 +11,85 @@ size = Vector2(1087, 92.5)
 size = Vector2(290, 97)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
-size = Vector2(431, 92.5)
+size = Vector2(431, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
 size = Vector2(50, 800)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8fns"]
+size = Vector2(1851, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
 size = Vector2(2869.5, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr85e"]
-size = Vector2(89, 80)
+size = Vector2(89, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23vdl"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_808v8"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndl30"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmja8"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh7tq"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip844"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcyfg"]
+atlas = ExtResource("2_d65cg")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxe0y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23vdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_808v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndl30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmja8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh7tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip844")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcyfg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 120.0
+}]
 
 [node name="Room" type="Node2D"]
 position = Vector2(-10, 660)
 
 [node name="Background" type="ColorRect" parent="."]
-offset_left = 47.0
-offset_top = -2.0
-offset_right = 1848.0
-offset_bottom = 798.0
+offset_left = -120.0
+offset_top = 73.0
+offset_right = 1681.0
+offset_bottom = 873.0
 color = Color(0.2, 0.2, 0.3, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -39,10 +101,10 @@ position = Vector2(241.5, -2)
 shape = SubResource("RectangleShape2D_ffxv4")
 
 [node name="FloorLeftSprite" type="ColorRect" parent="FloorLeft"]
-offset_left = -301.0
-offset_top = -49.0
-offset_right = 783.0
-offset_bottom = 51.0
+offset_left = -94.0
+offset_top = -235.0
+offset_right = 990.0
+offset_bottom = -135.0
 color = Color(0.4, 0.3, 0.2, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -80,13 +142,14 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(25, 400)
 
 [node name="LeftWallShape" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(455, -973)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="LeftWallSprite" type="ColorRect" parent="LeftWall"]
-offset_left = -25.0
-offset_top = -400.0
-offset_right = 25.0
-offset_bottom = 400.0
+offset_left = 432.0
+offset_top = -1364.0
+offset_right = 482.0
+offset_bottom = -564.0
 color = Color(0.1, 0.1, 0.1, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -98,10 +161,10 @@ position = Vector2(644, 10)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="RightWallSprite" type="ColorRect" parent="RightWall"]
-offset_left = 630.0
-offset_top = -395.0
-offset_right = 680.0
-offset_bottom = 405.0
+offset_left = 6.0
+offset_top = -691.0
+offset_right = 56.0
+offset_bottom = 109.0
 color = Color(0.1, 0.1, 0.1, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -109,7 +172,8 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(600, 25)
 
 [node name="TopWallShape" type="CollisionShape2D" parent="TopWall"]
-shape = SubResource("RectangleShape2D_floor")
+position = Vector2(326.5, -2)
+shape = SubResource("RectangleShape2D_t8fns")
 
 [node name="TopWallSprite" type="ColorRect" parent="TopWall"]
 offset_left = -600.0
@@ -151,9 +215,8 @@ offset_top = -175.0
 offset_right = 369.0
 offset_bottom = -43.0
 bbcode_enabled = true
-text = "[wave] Out of bounds Error...
-
-Expected ; at line 32"
+text = "[wave] print......................................................
+Stack Overflow-"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
@@ -178,30 +241,30 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(168, -123)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
-offset_left = 1013.0
-offset_top = 1255.0
-offset_right = 1102.0
-offset_bottom = 1337.0
+offset_left = 335.0
+offset_top = 532.0
+offset_right = 424.0
+offset_bottom = 614.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D2"]
-position = Vector2(1055, 1295)
+position = Vector2(377, 578)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(385, -131)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
+offset_left = 127.0
+offset_top = 756.0
+offset_right = 216.0
+offset_bottom = 838.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D3"]
-position = Vector2(1096, 1285)
+position = Vector2(172, 798)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="some parkour blocks"]
@@ -223,28 +286,40 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(331, -391)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
+offset_left = -40.0
+offset_top = 928.0
+offset_right = 49.0
+offset_bottom = 1010.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D5"]
-position = Vector2(1096, 1285)
+position = Vector2(3, 968)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(31, -425)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
+offset_left = 780.0
+offset_top = 839.0
+offset_right = 869.0
+offset_bottom = 921.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D6"]
-position = Vector2(1096, 1285)
+position = Vector2(824, 880.5)
 shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(676, -49)
+scale = Vector2(30.1553, 25.5947)
+sprite_frames = SubResource("SpriteFrames_lxe0y")
+frame_progress = 0.00576
+
+[node name="Code_Block" parent="." instance=ExtResource("3_gmlmv")]
+position = Vector2(2016, 53)
+code_to_unlock = "print_unlocked"
+popup_text = "You can now use print() on the editor"

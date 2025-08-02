@@ -20,6 +20,8 @@ var current_spawn_index: int = 0
 var droppable_scene = preload("res://scenes/droppable.tscn")
 var riseable_scene = preload("res://scenes/riseable.tscn")
 var mob_scene = preload("res://scenes/Mob.tscn")
+var spawned_nodes: Array[Node] = []
+
 
 func _ready():
 	# Connect to global signals
@@ -186,6 +188,8 @@ func spawn_card():
 	card.direction = Vector2.DOWN
 	get_tree().current_scene.add_child(card)
 	card.setup_droppable("Card")
+	spawned_nodes.append(card)  # in spawn_card
+
 	# Move to next spawn point for next card
 	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
 
@@ -203,6 +207,7 @@ func play_virus_rise():
 	riseable.direction = Vector2.UP
 	get_tree().current_scene.add_child(riseable)
 	riseable.setup_riseable("virus")
+	spawned_nodes.append(riseable) 
 	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
 	
 func play_mob_spawn():
@@ -217,6 +222,7 @@ func play_mob_spawn():
 	var mob = mob_scene.instantiate()
 	mob.global_position = spawn_point.global_position
 	get_tree().current_scene.add_child(mob)
+	spawned_nodes.append(mob)  
 	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
 
 func play_hole_appear():
@@ -254,10 +260,22 @@ func _on_loop_broken():
 	pass
 
 func _on_level_completed():
+	print("Cleaning up spawned nodes...")
+	
+	# Free all dynamically spawned nodes
+	for node in spawned_nodes:
+		if node and node.is_inside_tree():
+			node.queue_free()
+	spawned_nodes.clear()
+
+	# Reset loop/event state
 	loop_counter = 1
-	if Global.current_level == 2:
-		if get_node("card"):
-			get_node("card").queue_free()
 	current_event_index = 0
 	event_timer = 0.0
-	_on_loop_broken() 
+
+	# Additional level-specific cleanup
+	if Global.current_level == 2:
+		if has_node("card"):
+			get_node("card").queue_free()
+
+	_on_loop_broken()

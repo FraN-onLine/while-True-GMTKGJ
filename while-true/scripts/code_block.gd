@@ -19,6 +19,11 @@ func _on_body_entered(body):
 			print("spawn_unlocked")
 			show_popup()
 			get_parent().get_parent().get_node("CodeEditor").update_available_blocks()
+		elif code_to_unlock == "print_unlocked":
+			Global.print_unlocked = true
+			print("print_unlocked")
+			show_popup()
+			get_parent().get_parent().get_node("CodeEditor").update_available_blocks()
 		else:
 			print("Unknown code to unlock: ", code_to_unlock)
 		queue_free()  # Remove the pickup from the scene
