@@ -123,9 +123,9 @@ func _ready():
 func _input(event):
 	if not visible:
 		return
-	
+		
 	# Handle ESC key to close editor
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("close_editor"):
 		close_editor()
 		get_viewport().set_input_as_handled()
 		return
@@ -139,6 +139,15 @@ func _input(event):
 				end_drag()
 	elif event is InputEventMouseMotion and dragging:
 		update_drag(event.global_position)
+
+func _unhandled_input(event):
+	if not visible:
+		return
+	
+	if event.is_action_pressed("close_editor"):
+		close_editor()
+		get_viewport().set_input_as_handled()
+
 
 func _on_block_pressed(block_name: String):
 	print("Block pressed: ", block_name)  # Debug print
@@ -443,6 +452,7 @@ func show_help_dialog():
 	dialog.popup_centered()
 
 func close_editor():
+	Global.cooldown_editor = 0.5
 	print("Closing editor")  # Debug print
 	visible = false
 	get_tree().paused = false

@@ -41,6 +41,9 @@ func update_level_display():
 
 func open_code_editor():
 	code_editor.open_editor()
+	
+func close_code_editor():
+	code_editor.close_editor()
 
 func load_level_room():
 	# Remove current room

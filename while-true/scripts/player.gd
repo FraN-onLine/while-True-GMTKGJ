@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -545.0
+var input_timer = 0
+var input_min = 0.1
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -38,24 +40,26 @@ func _physics_process(delta):
 	# Check for falling off the world
 	if position.y > 900:
 		respawn()
+		
+	if Global.cooldown_editor > 0:
+		Global.cooldown_editor -= delta
 	
-	# Handle menu input
-	handle_menu_input()
-
-	
-	# Check for falling off the world
-	if position.y > 900:
-		respawn()
-	
-	# Handle menu input
-	handle_menu_input()
+	input_timer += delta
+	if input_min < input_timer and Global.cooldown_editor <= 0:
+		Global.cooldown_editor = 0
+		input_timer = 0
+		handle_menu_input()
 
 func handle_menu_input():
-	if Input.is_action_just_pressed("ui_cancel"):  # Escape key
-		open_code_editor()
+	if $"../CodeEditor".visible == false:
+		if Input.is_action_pressed("ui_cancel"):  # Escape key
+			open_code_editor()
+	else:
+		print("currently open")
+		if Input.is_action_pressed("ui_cancel"):  # Escape key
+			get_parent().close_code_editor()
 
 func open_code_editor():
-	# Signal to main game to open code editor
 	get_parent().open_code_editor() 
 
 func _on_body_entered(body):

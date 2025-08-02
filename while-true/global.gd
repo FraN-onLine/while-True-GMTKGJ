@@ -9,6 +9,7 @@ var loop_timer: float = 0.0
 var loop_duration: float = 5.0  # Default loop duration in seconds
 var allowed_items : Array = []
 var rise_unlocked: bool = false
+var cooldown_editor = 0
 
 # Signal for when a sequence is detected
 signal sequence_detected(sequence: Array)
