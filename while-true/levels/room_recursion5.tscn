@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqkxy4yf8v85d"]
+[gd_scene load_steps=11 format=3 uid="uid://cqkxy4yf8v85d"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_ggc1m"]
+[ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="1_lebw1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(1087, 92.5)
@@ -18,19 +19,22 @@ size = Vector2(50, 800)
 size = Vector2(1854, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
-size = Vector2(2869.5, 50)
+size = Vector2(3349.5, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr85e"]
 size = Vector2(89, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nanhr"]
+size = Vector2(127.5, 241)
 
 [node name="Room" type="Node2D"]
 position = Vector2(-10, 660)
 
 [node name="Background" type="ColorRect" parent="."]
-offset_left = 47.0
-offset_top = -2.0
-offset_right = 1848.0
-offset_bottom = 798.0
+offset_left = 42.0
+offset_top = 1.0
+offset_right = 1843.0
+offset_bottom = 801.0
 color = Color(0.2, 0.2, 0.3, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -127,23 +131,23 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(600, 825)
 
 [node name="DeathZoneShape" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(414.25, -647)
+position = Vector2(654.25, -647)
 shape = SubResource("RectangleShape2D_death")
 
 [node name="LoopManager" type="Node2D" parent="."]
 script = ExtResource("1_ggc1m")
 
 [node name="Spawn1" type="Marker2D" parent="LoopManager"]
-position = Vector2(633, -202)
+position = Vector2(581, -231)
 
 [node name="Spawn2" type="Marker2D" parent="LoopManager"]
-position = Vector2(923, -119)
+position = Vector2(900, -357)
 
 [node name="Spawn3" type="Marker2D" parent="LoopManager"]
-position = Vector2(923, -119)
+position = Vector2(1359, -345)
 
 [node name="Spawn4" type="Marker2D" parent="LoopManager"]
-position = Vector2(923, -119)
+position = Vector2(1653, -270)
 
 [node name="Instructions" type="Label" parent="."]
 offset_left = 600.0
@@ -173,30 +177,30 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-10, 660)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
-offset_left = 894.0
-offset_top = 554.0
-offset_right = 983.0
-offset_bottom = 636.0
+offset_left = 1867.0
+offset_top = -105.0
+offset_right = 1956.0
+offset_bottom = -23.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D"]
-position = Vector2(938, 596)
+position = Vector2(1912, -65)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(168, -123)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
-offset_left = 1013.0
-offset_top = 1255.0
-offset_right = 1102.0
-offset_bottom = 1337.0
+offset_left = 1177.0
+offset_top = 639.0
+offset_right = 1266.0
+offset_bottom = 721.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D2"]
-position = Vector2(1055, 1295)
+position = Vector2(1219, 680)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="some parkour blocks"]
@@ -218,43 +222,49 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(614, -262)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
+offset_left = 1557.0
+offset_top = 724.0
+offset_right = 1646.0
+offset_bottom = 806.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D4"]
-position = Vector2(1096, 1285)
+position = Vector2(1600, 762)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(331, -391)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
+offset_left = 513.0
+offset_top = 913.0
+offset_right = 602.0
+offset_bottom = 995.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D5"]
-position = Vector2(1096, 1285)
+position = Vector2(558, 954)
 shape = SubResource("RectangleShape2D_nr85e")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(31, -425)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
-color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
+offset_left = 1050.0
+offset_top = 853.0
+offset_right = 1173.0
+offset_bottom = 1094.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D6"]
-position = Vector2(1096, 1285)
-shape = SubResource("RectangleShape2D_nr85e")
+position = Vector2(1112, 972.5)
+shape = SubResource("RectangleShape2D_nanhr")
+
+[node name="Code_Block" parent="." instance=ExtResource("1_lebw1")]
+position = Vector2(2229, -369)
+code_to_unlock = "spawn_unlocked"
+popup_text = "You can now use spawn() on the editor"

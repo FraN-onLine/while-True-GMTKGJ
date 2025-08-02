@@ -3,7 +3,7 @@ extends Area2D
 @export var move_speed: float = 180.0
 
 var player: Node2D = null
-var timer := 3.0
+var timer := 3.5
 
 func _ready():
 	connect("body_entered", _on_body_entered)
@@ -24,3 +24,4 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		body.respawn()
+		self.queue_free()
