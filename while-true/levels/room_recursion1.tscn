@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhkv3bhgvjnj"]
+[gd_scene load_steps=9 format=3 uid="uid://dhkv3bhgvjnj"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_loop_manager"]
 [ext_resource type="PackedScene" uid="uid://jlpkujhqdbs7" path="res://scenes/droppable.tscn" id="2_droppable"]
+[ext_resource type="PackedScene" uid="uid://dpwye4af5se5w" path="res://scenes/Mob.tscn" id="3_667bt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(648, 97)
@@ -135,3 +136,6 @@ offset_bottom = 572.0
 bbcode_enabled = true
 text = "[wave] Everything in this world runs on a loop... record what happens and break the cycle...
 There will be no indicator when a loop starts or ends, keep your eyes peeled"
+
+[node name="Mob" parent="." instance=ExtResource("3_667bt")]
+position = Vector2(338, 586)

@@ -133,11 +133,17 @@ shape = SubResource("RectangleShape2D_death")
 [node name="LoopManager" type="Node2D" parent="."]
 script = ExtResource("1_ggc1m")
 
-[node name="Rise1" type="Marker2D" parent="LoopManager"]
-position = Vector2(1161, 757)
+[node name="Spawn1" type="Marker2D" parent="LoopManager"]
+position = Vector2(633, -202)
 
-[node name="Rise2" type="Marker2D" parent="LoopManager"]
-position = Vector2(1509, 759)
+[node name="Spawn2" type="Marker2D" parent="LoopManager"]
+position = Vector2(923, -119)
+
+[node name="Spawn3" type="Marker2D" parent="LoopManager"]
+position = Vector2(923, -119)
+
+[node name="Spawn4" type="Marker2D" parent="LoopManager"]
+position = Vector2(923, -119)
 
 [node name="Instructions" type="Label" parent="."]
 offset_left = 600.0

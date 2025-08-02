@@ -19,6 +19,7 @@ var current_spawn_index: int = 0
 # Droppable resources
 var droppable_scene = preload("res://scenes/droppable.tscn")
 var riseable_scene = preload("res://scenes/riseable.tscn")
+var mob_scene = preload("res://scenes/Mob.tscn")
 
 func _ready():
 	# Connect to global signals
@@ -62,6 +63,8 @@ func play_next_event():
 				play_hole_close()
 			"virus_rise":
 				play_virus_rise()
+			"mob_spawn":
+				play_mob_spawn()
 			_:
 				if Global.current_level == 3:
 					if event.begins_with("if__"):
@@ -159,7 +162,14 @@ func setup_level_elements():
 				get_node_or_null("Rise2")
 			]
 			current_spawn_index = 0
-			
+		5:
+			spawn_points = [
+				get_node_or_null("Spawn1"),
+				get_node_or_null("Spawn2"),
+				get_node_or_null("Spawn3"),
+				get_node_or_null("Spawn4")
+			]
+			current_spawn_index = 0
 
 func spawn_card():
 	if spawn_points.size() == 0:
@@ -194,6 +204,20 @@ func play_virus_rise():
 	get_tree().current_scene.add_child(riseable)
 	riseable.setup_riseable("virus")
 	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
+	
+func play_mob_spawn():
+	print("Mob spawning!")
+	# This would be implemented with actual virus sprites
+	if spawn_points.size() == 0:
+		print("No spawnpoints!")
+		return
+	var spawn_point = spawn_points[current_spawn_index]
+	print("Spawning mob at spawn point ", current_spawn_index, " at position ", spawn_point.global_position)
+
+	var mob = mob_scene.instantiate()
+	mob.global_position = spawn_point.global_position
+	get_tree().current_scene.add_child(mob)
+	current_spawn_index = (current_spawn_index + 1) % spawn_points.size()
 
 func play_hole_appear():
 	print("Hole appearing!")
@@ -227,9 +251,7 @@ func play_light_off():
 	tween.tween_property(get_parent().get_node("Room/Background"), "color", Color(0.2, 0.2, 0.3, 1), 0.5)
 
 func _on_loop_broken():
-	# Stop all animations
 	pass
-	
 
 func _on_level_completed():
 	loop_counter = 1

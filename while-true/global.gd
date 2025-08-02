@@ -9,6 +9,8 @@ var loop_timer: float = 0.0
 var loop_duration: float = 5.0  # Default loop duration in seconds
 var allowed_items : Array = []
 var rise_unlocked: bool = false
+var spawn_unlocked: bool = false
+var print_unlocked: bool = false
 var cooldown_editor = 0
 
 # Signal for when a sequence is detected
@@ -47,8 +49,12 @@ func load_level(level_number: int):
 			allowed_items = ["virus"]
 		5:
 			loop_duration = 5.0
-			current_sequence = ["mob_spawn", "mob_spawn", "mob_spawn"]
-			allowed_items = ["virus"]
+			current_sequence = ["mob_spawn", "mob_spawn", "mob_spawn", "mob_spawn"]
+			allowed_items = ["mob"]
+		6:
+			loop_duration = 5.0
+			current_sequence = ["hello_world_print"]
+			allowed_items = ["Hello World"]
 		_:
 			loop_duration = 5.0
 			current_sequence = []

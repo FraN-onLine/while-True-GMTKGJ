@@ -61,6 +61,14 @@ text = "if:"
 layout_mode = 2
 text = "rise()"
 
+[node name="SpawnBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "spawn()"
+
+[node name="PrintBlock" type="Button" parent="VBoxContainer/HSplitContainer/AvailableBlocks/BlockList"]
+layout_mode = 2
+text = "print()"
+
 [node name="CodeArea" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
 layout_mode = 2
 

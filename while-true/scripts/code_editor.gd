@@ -17,7 +17,9 @@ var available_blocks = {
 	"hole_open()": {"type": "function", "params": []},
 	"hole_close()": {"type": "function", "params": []},
 	"wait()": {"type": "function", "params": ["1", "2", "3"]},
-	"if:": {"type": "conditional", "params": ["loop / 2 == 0", "loop > 2"]}
+	"if:": {"type": "conditional", "params": ["loop / 2 == 0", "loop > 2"]},
+	"spawn()": {"type": "function", "params": []},
+	"print()": {"type": "function", "params": []}
 }
 
 # Dragging variables
@@ -179,7 +181,7 @@ func add_function_block(block_name: String, block_data: Dictionary):
 	inner_container.add_child(func_label)
 
 	# For drop() and flash(), use OptionButton for item selection
-	if block_name in ["drop()", "rise()"]:
+	if block_name in ["drop()", "rise()", "spawn()", "print()"]:
 		var option_button = OptionButton.new()
 		var allowed = Global.allowed_items if Global.allowed_items.size() > 0 else null
 		var dir = DirAccess.open("res://resources/")
@@ -388,6 +390,11 @@ func convert_code_to_sequence(code_sequence: Array) -> Array:
 				converted.append("hole_close")
 			elif code.begins_with("wait("):
 				converted.append("wait")
+			elif code.begins_with("spawn("):
+				var param = code.split("(")[1].split(")")[0]
+				converted.append(param + "_spawn")
+			elif code.begins_with("print("):
+				converted.append("hello_world_print")
 	else:
 		for code in code_sequence:
 			if code.begins_with("drop("):
@@ -483,6 +490,10 @@ func update_available_blocks():
 					child.visible = (Global.current_level >= 2)  # Only show for Level 2+
 				"rise()":
 					child.visible = Global.rise_unlocked
+				"spawn()":
+					child.visible = Global.spawn_unlocked
+				"print()":
+					child.visible = Global.print_unlocked
 # Styling functions
 func create_block_style() -> StyleBoxFlat:
 	var style = StyleBoxFlat.new()

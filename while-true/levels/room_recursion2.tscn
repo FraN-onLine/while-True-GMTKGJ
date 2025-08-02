@@ -93,11 +93,14 @@ offset_bottom = 25.0
 color = Color(0.1, 0.1, 0.1, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 65.0
-offset_top = 512.0
-offset_right = 475.0
-offset_bottom = 627.0
+offset_left = 66.0
+offset_top = 459.0
+offset_right = 476.0
+offset_bottom = 645.0
 bbcode_enabled = true
 text = "[wave] maybe one glance at the loop is not enough, try playing with the conditional statements?
 
-If Blocks: will trigger one code block below if the condition is met"
+If Blocks: will trigger one code block below if the condition is met
+Hint:  
+Greater than(>) only occurs if i is greater than j
+Modulo(%) only occurs if i is divisible by j"
