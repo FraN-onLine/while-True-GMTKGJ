@@ -55,6 +55,10 @@ func load_level(level_number: int):
 			loop_duration = 5.0
 			current_sequence = ["hello_world_print"]
 			allowed_items = ["Hello World"]
+		7:
+			loop_duration = 5.0
+			current_sequence = ["mob_spawn", "mob_spawn", "mob_spawn", "mob_spawn"]
+			allowed_items = ["mob"]
 		_:
 			loop_duration = 5.0
 			current_sequence = []

@@ -4,6 +4,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -545.0
 var input_timer = 0
 var input_min = 0.1
+var level_7 = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -27,9 +28,18 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
 	
-	# Invert controls if on level 4
+	# Invert controls if on level 4/7
 	if Global.current_level == 4:
 		direction *= -1
+	if Global.current_level == 7:
+		level_7 += delta #accumulator
+		if level_7 < 18:
+			direction *= -1
+		if level_7 >= 30:
+			direction *= -1
+		if level_7 > 22 and level_7 < 23:
+			direction += -1
+		
 	
 	if direction:
 		velocity.x = direction * SPEED

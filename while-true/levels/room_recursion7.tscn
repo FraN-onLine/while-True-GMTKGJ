@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://dae8axo6h16u8"]
+[gd_scene load_steps=10 format=3 uid="uid://i6gpa564cofm"]
 
-[ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_t8fns"]
-[ext_resource type="Texture2D" uid="uid://c3t0h7wmy85d7" path="res://Assets/Hello-World.png" id="2_d65cg"]
-[ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="3_gmlmv"]
+[ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_gm4cx"]
+[ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="2_05jqc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(1087, 92.5)
@@ -11,87 +10,28 @@ size = Vector2(1087, 92.5)
 size = Vector2(290, 97)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
-size = Vector2(431, 44)
+size = Vector2(431, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
 size = Vector2(50, 800)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8fns"]
-size = Vector2(1851, 44)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdpey"]
+size = Vector2(1076.5, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
-size = Vector2(2869.5, 50)
+size = Vector2(1849, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr85e"]
-size = Vector2(89, 77)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_23vdl"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_808v8"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ndl30"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lmja8"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yh7tq"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ip844"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lcyfg"]
-atlas = ExtResource("2_d65cg")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lxe0y"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_23vdl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_808v8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ndl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lmja8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yh7tq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ip844")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lcyfg")
-}],
-"loop": true,
-"name": &"default",
-"speed": 120.0
-}]
+size = Vector2(89, 80)
 
 [node name="Room" type="Node2D"]
-position = Vector2(-10, 660)
 
 [node name="Background" type="ColorRect" parent="."]
-offset_left = -120.0
-offset_top = 73.0
-offset_right = 1681.0
-offset_bottom = 873.0
+offset_left = 47.0
+offset_top = -2.0
+offset_right = 1848.0
+offset_bottom = 798.0
 color = Color(0.2, 0.2, 0.3, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="FloorLeft" type="StaticBody2D" parent="."]
 position = Vector2(350, 750)
@@ -101,12 +41,11 @@ position = Vector2(241.5, -2)
 shape = SubResource("RectangleShape2D_ffxv4")
 
 [node name="FloorLeftSprite" type="ColorRect" parent="FloorLeft"]
-offset_left = -94.0
-offset_top = -235.0
-offset_right = 990.0
-offset_bottom = -135.0
+offset_left = -301.0
+offset_top = -49.0
+offset_right = 783.0
+offset_bottom = 51.0
 color = Color(0.4, 0.3, 0.2, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="FloorRight" type="StaticBody2D" parent="."]
 position = Vector2(850, 750)
@@ -121,7 +60,6 @@ offset_top = -49.0
 offset_right = 1003.0
 offset_bottom = 51.0
 color = Color(0.4, 0.3, 0.2, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="Hole" type="StaticBody2D" parent="."]
 position = Vector2(850, 750)
@@ -136,22 +74,19 @@ offset_top = -49.0
 offset_right = 763.0
 offset_bottom = 51.0
 color = Color(0.4, 0.3, 0.2, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 position = Vector2(25, 400)
 
 [node name="LeftWallShape" type="CollisionShape2D" parent="LeftWall"]
-position = Vector2(455, -973)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="LeftWallSprite" type="ColorRect" parent="LeftWall"]
-offset_left = 432.0
-offset_top = -1364.0
-offset_right = 482.0
-offset_bottom = -564.0
+offset_left = -25.0
+offset_top = -400.0
+offset_right = 25.0
+offset_bottom = 400.0
 color = Color(0.1, 0.1, 0.1, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 position = Vector2(1175, 400)
@@ -161,19 +96,18 @@ position = Vector2(644, 10)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="RightWallSprite" type="ColorRect" parent="RightWall"]
-offset_left = 6.0
-offset_top = -691.0
-offset_right = 56.0
-offset_bottom = 109.0
+offset_left = 630.0
+offset_top = -395.0
+offset_right = 680.0
+offset_bottom = 405.0
 color = Color(0.1, 0.1, 0.1, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="TopWall" type="StaticBody2D" parent="."]
 position = Vector2(600, 25)
 
 [node name="TopWallShape" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(326.5, -2)
-shape = SubResource("RectangleShape2D_t8fns")
+position = Vector2(322.75, 0)
+shape = SubResource("RectangleShape2D_gdpey")
 
 [node name="TopWallSprite" type="ColorRect" parent="TopWall"]
 offset_left = -600.0
@@ -181,17 +115,16 @@ offset_top = -25.0
 offset_right = 1249.0
 offset_bottom = 25.0
 color = Color(0.1, 0.1, 0.1, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="DeathZone" type="Area2D" parent="."]
 position = Vector2(600, 825)
 
 [node name="DeathZoneShape" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(414.25, -647)
+position = Vector2(324.5, 0)
 shape = SubResource("RectangleShape2D_death")
 
 [node name="LoopManager" type="Node2D" parent="."]
-script = ExtResource("1_t8fns")
+script = ExtResource("1_gm4cx")
 
 [node name="Rise1" type="Marker2D" parent="LoopManager"]
 position = Vector2(1161, 757)
@@ -199,31 +132,21 @@ position = Vector2(1161, 757)
 [node name="Rise2" type="Marker2D" parent="LoopManager"]
 position = Vector2(1509, 759)
 
-[node name="Instructions" type="Label" parent="."]
-offset_left = 600.0
-offset_top = 50.0
-offset_right = 600.0
-offset_bottom = 50.0
-text = ",':/"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 42.0
-offset_top = -175.0
-offset_right = 369.0
-offset_bottom = -43.0
+offset_left = 159.0
+offset_top = 532.0
+offset_right = 486.0
+offset_bottom = 664.0
 bbcode_enabled = true
-text = "[wave] print......................................................
-Stack Overflow-"
-fit_content = true
-metadata/_edit_use_anchors_ = true
+text = "[wave] Recursion terminated.....
+
+Returning to last stable version...
+Ability to use rise() revoked,
+Error: Input Map not working as intended"
 
 [node name="some parkour blocks" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="some parkour blocks"]
-position = Vector2(-10, 660)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
 offset_left = 894.0
@@ -231,7 +154,6 @@ offset_top = 554.0
 offset_right = 983.0
 offset_bottom = 636.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D"]
 position = Vector2(938, 596)
@@ -241,86 +163,71 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(168, -123)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
-offset_left = 335.0
-offset_top = 532.0
-offset_right = 424.0
-offset_bottom = 614.0
+offset_left = 1023.0
+offset_top = 595.0
+offset_right = 1112.0
+offset_bottom = 677.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D2"]
-position = Vector2(377, 578)
+position = Vector2(1065, 635)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(385, -131)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
-offset_left = 127.0
-offset_top = 756.0
-offset_right = 216.0
-offset_bottom = 838.0
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D3"]
-position = Vector2(172, 798)
+position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(614, -262)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
-offset_left = 1051.0
-offset_top = 1244.0
-offset_right = 1140.0
-offset_bottom = 1326.0
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D4"]
-position = Vector2(1096, 1285)
+position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="some parkour blocks"]
-position = Vector2(331, -391)
+position = Vector2(326, -348)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
-offset_left = -40.0
-offset_top = 928.0
-offset_right = 49.0
-offset_bottom = 1010.0
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D5"]
-position = Vector2(3, 968)
+position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(31, -425)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
-offset_left = 780.0
-offset_top = 839.0
-offset_right = 869.0
-offset_bottom = 921.0
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D6"]
-position = Vector2(824, 880.5)
+position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = -1
-position = Vector2(676, -49)
-scale = Vector2(30.1553, 25.5947)
-sprite_frames = SubResource("SpriteFrames_lxe0y")
-autoplay = "default"
-frame_progress = 0.0834
-
-[node name="Code_Block" parent="." instance=ExtResource("3_gmlmv")]
-position = Vector2(2016, 53)
-code_to_unlock = "print_unlocked"
-popup_text = "You can now use print() on the editor"
+[node name="Code_Block" parent="." instance=ExtResource("2_05jqc")]
+position = Vector2(1137, 115)

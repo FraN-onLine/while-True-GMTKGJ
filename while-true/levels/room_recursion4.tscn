@@ -138,10 +138,10 @@ offset_top = 532.0
 offset_right = 486.0
 offset_bottom = 664.0
 bbcode_enabled = true
-text = "[wave] Recursion terminated.....
+text = "[wave] Code Restored.....
 
 Returning to last stable version...
-Ability to use rise() revoked,
+Ability to use rise() and spawn() revoked,
 Error: Input Map not working as intended"
 
 [node name="some parkour blocks" type="Node" parent="."]

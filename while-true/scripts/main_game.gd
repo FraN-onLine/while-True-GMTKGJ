@@ -68,6 +68,10 @@ func load_level_room():
 			room_scene_path = "res://levels/room_recursion5.tscn"
 		6:
 			room_scene_path = "res://levels/room_recursion6.tscn"
+		7:
+			Global.rise_unlocked = false
+			Global.spawn_unlocked = false
+			room_scene_path = "res://levels/room_recursion7.tscn"
 		_:
 			room_scene_path = "res://levels/room_recursion1.tscn"
 	
