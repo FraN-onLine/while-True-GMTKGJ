@@ -40,10 +40,17 @@ func load_level(level_number: int):
 			loop_duration = 5.0
 			current_sequence = ["hole_appear", "if__loop_%_3_==_0", "virus_rise", "virus_rise", "hole_close"]
 			allowed_items = ["card", "virus"]
-			
+		4:
+			loop_duration = 5.0
+			current_sequence = ["hole_appear", "virus_rise", "virus_rise", "hole_close"]
+			allowed_items = ["virus"]
+		5:
+			loop_duration = 5.0
+			current_sequence = ["mob_spawn", "mob_spawn", "mob_spawn"]
+			allowed_items = ["virus"]
 		_:
 			loop_duration = 5.0
-			current_sequence = ["anvil_drop", "hole_appear", "hole_close"]
+			current_sequence = []
 			allowed_items = ["anvil"]
 
 func add_to_detected_sequence(event: String):

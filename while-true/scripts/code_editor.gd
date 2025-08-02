@@ -399,8 +399,6 @@ func _on_break_pressed():
 		Global.detected_sequence = converted_sequence
 		if Global.break_loop():
 			status_label.text = "Loop broken! Level complete!"
-			await get_tree().create_timer(2.0).timeout
-			close_editor()
 		else:
 			status_label.text = "Failed to break loop. Try again."
 	else:
@@ -422,16 +420,11 @@ func show_help_dialog():
 	
 	1. ADDING BLOCKS:
 	   - Click on any button in "Available Blocks" to add it to your code
-	   - Only relevant blocks are shown for each level
-	
-	2. DRAGGING BLOCKS:
-	   - Click and drag any code block to reorder them
-	   - Blocks become semi-transparent while dragging
 	
 	3. EDITING PARAMETERS:
 	   - Click in the input fields to edit function parameters
 	   - For drop(): enter "anvil", "card", etc.
-	   - For if: enter conditions like "level / 2 == 0"
+	   - For if: enter conditions like "level % 2 == 0"
 	
 	4. REMOVING BLOCKS:
 	   - Click the "×" button on any block to remove it
@@ -445,19 +438,6 @@ func show_help_dialog():
 	
 	7. CLOSING EDITOR:
 	   - Press ESC or click "Close" to return to the game
-	
-	LEVEL 1 SOLUTION:
-	while true:
-		drop(anvil)
-		hole_open()
-		hole_close()
-	
-	LEVEL 2 SOLUTION:
-	while true:
-		drop(card)
-		drop(card)
-		if level / 2 == 0:
-			drop(card)
 	"""
 	add_child(dialog)
 	dialog.popup_centered()

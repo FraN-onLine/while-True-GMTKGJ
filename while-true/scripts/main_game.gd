@@ -59,8 +59,13 @@ func load_level_room():
 		3:
 			room_scene_path = "res://levels/room_recursion3.tscn"
 		4:
+			Global.rise_unlocked = false
 			room_scene_path = "res://levels/room_recursion4.tscn"
 		#add here for more rooms
+		5:
+			room_scene_path = "res://levels/room_recursion5.tscn"
+		6:
+			room_scene_path = "res://levels/room_recursion6.tscn"
 		_:
 			room_scene_path = "res://levels/room_recursion1.tscn"
 	

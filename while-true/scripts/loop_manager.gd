@@ -153,6 +153,13 @@ func setup_level_elements():
 				get_node_or_null("Rise2")
 			]
 			current_spawn_index = 0
+		4:
+			spawn_points = [
+				get_node_or_null("Rise1"),
+				get_node_or_null("Rise2")
+			]
+			current_spawn_index = 0
+			
 
 func spawn_card():
 	if spawn_points.size() == 0:

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -535.0
+const JUMP_VELOCITY = -545.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -24,12 +24,24 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("move_left", "move_right")
+	
+	# Invert controls if on level 4
+	if Global.current_level == 4:
+		direction *= -1
+	
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	# Check for falling off the world
+	if position.y > 900:
+		respawn()
+	
+	# Handle menu input
+	handle_menu_input()
+
 	
 	# Check for falling off the world
 	if position.y > 900:
