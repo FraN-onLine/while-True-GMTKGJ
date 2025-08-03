@@ -59,6 +59,10 @@ func load_level(level_number: int):
 			loop_duration = 5.0
 			current_sequence = ["virus_rise", "mob_spawn","virus_rise", "mob_spawn", "Leave!_print"]
 			allowed_items = ["virus","mob","Leave!"]
+		8:
+			loop_duration = 5.0
+			current_sequence = ["u think?"]
+			allowed_items = ["you think there's an escape..."]
 		_:
 			loop_duration = 5.0
 			current_sequence = []

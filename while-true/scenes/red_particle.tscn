@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmlcj4skxmyag"]
+
+[ext_resource type="Texture2D" uid="uid://bwceq7qrnjumv" path="res://Assets/red_particles-Sheet.png" id="1_ry0ry"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8dhb"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr1dv"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pchoy"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvwgx"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp845"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s37kj"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6a55"]
+atlas = ExtResource("1_ry0ry")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5yv84"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8dhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mr1dv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pchoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvwgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp845")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s37kj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6a55")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="Node2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_5yv84")
+autoplay = "default"
+frame_progress = 0.824348

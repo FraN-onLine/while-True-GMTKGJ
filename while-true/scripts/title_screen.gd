@@ -33,7 +33,7 @@ func show_instructions():
 	var dialog = AcceptDialog.new()
 	dialog.title = "Instructions"
 	dialog.dialog_text = """
-	While True - Loop Breaking Puzzle Game
+	While True:
 	
 	HOW TO PLAY:
 	1. Watch the repeating sequence of events in the room
@@ -42,7 +42,7 @@ func show_instructions():
 	4. Test your code and break the loop!
 	
 	CONTROLS:
-	- WASD: Move character
+	- WASD or Arrow Keys: Move character
 	- Space: Jump
 	- ESC: Open code editor
 	
@@ -59,13 +59,6 @@ func show_settings():
 	dialog.dialog_text = """
 	Settings
 	
-	This is where you can configure:
-	- Sound volume
-	- Graphics quality
-	- Control sensitivity
-	- And more!
-	
-	(Coming soon in future updates)
 	"""
 	add_child(dialog)
 	dialog.popup_centered() 

@@ -14,6 +14,8 @@ var card_falling: bool = false
 # Spawn points for cards
 var spawn_points: Array[Marker2D] = []
 var current_spawn_index: int = 0
+var level_8 = 0
+var level_8_started = false
 
 # Droppable resources
 var droppable_scene = preload("res://scenes/droppable.tscn")
@@ -29,8 +31,15 @@ func _ready():
 	
 	# Setup level-specific elements
 	setup_level_elements()
+	
 
 func _process(delta):
+	if Global.current_level == 8:
+		level_8 += delta
+		if level_8 > 5 and !level_8_started:
+			level_8_started = true
+			start_cinematic_sequence()
+		
 	if not Global.is_loop_active:
 		return
 	
@@ -185,6 +194,7 @@ func setup_level_elements():
 				get_node_or_null("Spawn2")
 			]
 			current_spawn_index = 0
+		
 func spawn_card():
 	if spawn_points.size() == 0:
 		print("No spawn points found for cards!")
@@ -308,3 +318,79 @@ func _on_level_completed():
 			get_node("card").queue_free()
 
 	_on_loop_broken()
+
+func start_cinematic_sequence():
+	var messages = [
+		"Error exception occurred..",
+		"Rebooting the system, Please wait...",
+		"As long as the PLAYER exists, the loop continues on.."
+	]
+
+	# UI layer on top
+	var ui_layer = CanvasLayer.new()
+	add_child(ui_layer)
+
+	# Fullscreen black background
+	var fade_rect = ColorRect.new()
+	fade_rect.color = Color(0, 0, 0, 1)
+	fade_rect.anchor_left = 0
+	fade_rect.anchor_top = 0
+	fade_rect.anchor_right = 1
+	fade_rect.anchor_bottom = 1
+	ui_layer.add_child(fade_rect)
+
+	# Label setup
+	var label = Label.new()
+	label.text = ""
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	label.modulate.a = 0
+	label.add_theme_font_size_override("font_size", 32)
+	label.anchor_left = 0
+	label.anchor_top = 0
+	label.anchor_right = 1
+	label.anchor_bottom = 1
+	ui_layer.add_child(label)
+
+	# Initial fade-in of background
+	var fade_bg = create_tween()
+	fade_bg.tween_property(fade_rect, "modulate:a", 1.0, 1.0)
+	await fade_bg.finished
+
+	# Iterate messages
+	for message in messages:
+		# Fade in label
+		label.modulate = Color(1, 1, 1, 0)
+		var fade_in = create_tween()
+		fade_in.tween_property(label, "modulate:a", 1.0, 0.5)
+		await fade_in.finished
+
+		# Typing effect
+		await type_text(label, message, 0.06)
+
+		await get_tree().create_timer(2.0).timeout  # Hold after typing
+
+		# Fade out text
+		var fade_out = create_tween()
+		fade_out.tween_property(label, "modulate:a", 0.0, 1.0)
+		await fade_out.finished
+		label.text = ""
+
+		await get_tree().create_timer(0.5).timeout  # Brief pause between messages
+
+	await get_tree().create_timer(1.5).timeout
+
+	# Optional fade to black before scene change
+	var fade_to_black = create_tween()
+	fade_to_black.tween_property(fade_rect, "modulate:a", 1.0, 1.0)
+	await fade_to_black.finished
+
+	get_tree().change_scene_to_file("res://scenes/title_screen_end.tscn")  # Update path
+
+func type_text(label: Label, full_text: String, speed: float = 0.05) -> void:
+	label.text = ""
+	for i in range(full_text.length()):
+		label.text += full_text[i]
+		await get_tree().create_timer(speed).timeout

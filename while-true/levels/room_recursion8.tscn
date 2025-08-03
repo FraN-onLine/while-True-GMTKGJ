@@ -1,0 +1,281 @@
+[gd_scene load_steps=12 format=3 uid="uid://dj5edmnli7w0m"]
+
+[ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_rcnev"]
+[ext_resource type="Texture2D" uid="uid://cxfamwjkktrt6" path="res://Assets/Error.png" id="2_rcnev"]
+[ext_resource type="PackedScene" uid="uid://cmlcj4skxmyag" path="res://scenes/red_particle.tscn" id="3_3iwdr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
+size = Vector2(1087, 92.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85yof"]
+size = Vector2(290, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(431, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(50, 800)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdpey"]
+size = Vector2(1643, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
+size = Vector2(1849, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nr85e"]
+size = Vector2(89, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gm4cx"]
+size = Vector2(113, 107)
+
+[node name="Room" type="Node2D"]
+
+[node name="FloorLeft" type="StaticBody2D" parent="."]
+position = Vector2(350, 750)
+
+[node name="FloorLeftShape" type="CollisionShape2D" parent="FloorLeft"]
+position = Vector2(241.5, -2)
+shape = SubResource("RectangleShape2D_ffxv4")
+
+[node name="FloorLeftSprite" type="ColorRect" parent="FloorLeft"]
+offset_left = -301.0
+offset_top = -49.0
+offset_right = 783.0
+offset_bottom = 51.0
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="FloorRight" type="StaticBody2D" parent="."]
+position = Vector2(850, 750)
+
+[node name="FloorRightShape" type="CollisionShape2D" parent="FloorRight"]
+position = Vector2(857, 1)
+shape = SubResource("RectangleShape2D_85yof")
+
+[node name="FloorRightSprite" type="ColorRect" parent="FloorRight"]
+offset_left = 763.0
+offset_top = -49.0
+offset_right = 1003.0
+offset_bottom = 51.0
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="Hole" type="StaticBody2D" parent="."]
+position = Vector2(850, 750)
+
+[node name="HoleShape" type="CollisionShape2D" parent="Hole"]
+position = Vector2(497.5, -2)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="HoleSprite" type="ColorRect" parent="Hole"]
+offset_left = 276.0
+offset_top = -49.0
+offset_right = 763.0
+offset_bottom = 51.0
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(25, 400)
+
+[node name="LeftWallShape" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="LeftWallSprite" type="ColorRect" parent="LeftWall"]
+offset_left = -25.0
+offset_top = -400.0
+offset_right = 25.0
+offset_bottom = 400.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1175, 400)
+
+[node name="RightWallShape" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(644, 10)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWallSprite" type="ColorRect" parent="RightWall"]
+offset_left = 630.0
+offset_top = -395.0
+offset_right = 680.0
+offset_bottom = 405.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(600, 25)
+
+[node name="TopWallShape" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(214.5, 0)
+shape = SubResource("RectangleShape2D_gdpey")
+
+[node name="TopWallSprite" type="ColorRect" parent="TopWall"]
+offset_left = -600.0
+offset_top = -25.0
+offset_right = 1249.0
+offset_bottom = 25.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2(600, 825)
+
+[node name="DeathZoneShape" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2(324.5, 0)
+shape = SubResource("RectangleShape2D_death")
+
+[node name="LoopManager" type="Node2D" parent="."]
+script = ExtResource("1_rcnev")
+
+[node name="Rise1" type="Marker2D" parent="LoopManager"]
+position = Vector2(1720, 756)
+
+[node name="Spawn1" type="Marker2D" parent="LoopManager"]
+position = Vector2(554, 218)
+
+[node name="Rise2" type="Marker2D" parent="LoopManager"]
+position = Vector2(987, 435)
+
+[node name="Spawn2" type="Marker2D" parent="LoopManager"]
+position = Vector2(1281, 40)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 129.0
+offset_top = 509.0
+offset_right = 456.0
+offset_bottom = 675.0
+bbcode_enabled = true
+text = "[wave] You think you can escape the loop?"
+
+[node name="some parkour blocks" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="some parkour blocks"]
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
+offset_left = 850.0
+offset_top = 395.0
+offset_right = 939.0
+offset_bottom = 477.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D"]
+position = Vector2(888, 435)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="some parkour blocks"]
+position = Vector2(168, -123)
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
+offset_left = 1023.0
+offset_top = 595.0
+offset_right = 1112.0
+offset_bottom = 677.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D2"]
+position = Vector2(1065, 635)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="some parkour blocks"]
+position = Vector2(385, -131)
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D3"]
+position = Vector2(1106, 625)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="some parkour blocks"]
+position = Vector2(614, -262)
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D4"]
+position = Vector2(1106, 625)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="some parkour blocks"]
+position = Vector2(326, -348)
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D5"]
+position = Vector2(1106, 625)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="some parkour blocks"]
+position = Vector2(31, -425)
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
+offset_left = 1061.0
+offset_top = 584.0
+offset_right = 1150.0
+offset_bottom = 666.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D6"]
+position = Vector2(1106, 625)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="some parkour blocks"]
+position = Vector2(573, -474)
+
+[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D7"]
+offset_left = 416.0
+offset_top = 985.0
+offset_right = 505.0
+offset_bottom = 1067.0
+color = Color(0.301961, 0.105882, 0.133333, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D7"]
+position = Vector2(455, 1021)
+shape = SubResource("RectangleShape2D_nr85e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(884, 343)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(824, 297)
+shape = SubResource("RectangleShape2D_gm4cx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(939.125, 449.25)
+scale = Vector2(13.9512, 6.13672)
+texture = ExtResource("2_rcnev")
+
+[node name="Node2D" parent="." instance=ExtResource("3_3iwdr")]
+position = Vector2(886, 875)
+scale = Vector2(4.6875, 5.0625)
+frame_progress = 0.801743
+
+[node name="Node2D2" parent="." instance=ExtResource("3_3iwdr")]
+position = Vector2(-48, 821)
+scale = Vector2(4.6875, 5.0625)
+frame_progress = 0.248604
+
+[node name="Node2D3" parent="." instance=ExtResource("3_3iwdr")]
+position = Vector2(-29, 404)
+scale = Vector2(4.6875, 5.0625)
+frame_progress = 0.191787
+
+[node name="Node2D4" parent="." instance=ExtResource("3_3iwdr")]
+position = Vector2(1607, 658)
+scale = Vector2(4.6875, 5.0625)
+frame_progress = 0.579847
+
+[node name="Node2D5" parent="." instance=ExtResource("3_3iwdr")]
+position = Vector2(699, -73)
+scale = Vector2(4.6875, 5.0625)
+frame_progress = 0.727405
