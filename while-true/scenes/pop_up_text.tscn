@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1w8k8ficafnd"]
+[gd_scene load_steps=3 format=3 uid="uid://b1w8k8ficafnd"]
 
 [ext_resource type="Script" uid="uid://1k1ovn5imu2d" path="res://scripts/popup_text.gd" id="1_wiu1o"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="2_77jxo"]
 
 [node name="PopUpText" type="CanvasLayer"]
 layer = 3
@@ -24,6 +25,8 @@ rotation = 0.000707048
 scale = Vector2(1.4, 1.4)
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_fonts/normal_font = ExtResource("2_77jxo")
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "ssafcdfscjhnisdybiuc"
 horizontal_alignment = 1

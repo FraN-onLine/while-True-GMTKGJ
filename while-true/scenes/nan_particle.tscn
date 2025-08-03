@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpsejf4qjvvqb"]
+
+[ext_resource type="Texture2D" uid="uid://dcs3eo61cqera" path="res://Assets/noparticle-Sheet.png" id="1_b6hfv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdk3m"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84ycl"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu3ci"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljypa"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru2b2"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydr46"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_autre"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6opeb"]
+atlas = ExtResource("1_b6hfv")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5yv84"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdk3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84ycl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu3ci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljypa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru2b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydr46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_autre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6opeb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Node2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_5yv84")
+autoplay = "default"
+frame_progress = 0.180474

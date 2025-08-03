@@ -1,8 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://dae8axo6h16u8"]
+[gd_scene load_steps=25 format=3 uid="uid://dae8axo6h16u8"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_t8fns"]
 [ext_resource type="Texture2D" uid="uid://c3t0h7wmy85d7" path="res://Assets/Hello-World.png" id="2_d65cg"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="2_lmja8"]
 [ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="3_gmlmv"]
+[ext_resource type="Texture2D" uid="uid://cvfg251wh24v" path="res://Assets/missing.png" id="4_808v8"]
+[ext_resource type="Texture2D" uid="uid://b1kobfbxvosml" path="res://Assets/cursor.png" id="5_ndl30"]
+[ext_resource type="Texture2D" uid="uid://pxqnxelsm74v" path="res://Assets/notfound.png" id="6_lmja8"]
+[ext_resource type="PackedScene" uid="uid://dpsejf4qjvvqb" path="res://scenes/nan_particle.tscn" id="7_ndl30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(1087, 92.5)
@@ -20,10 +25,10 @@ size = Vector2(50, 800)
 size = Vector2(1851, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
-size = Vector2(2869.5, 50)
+size = Vector2(3417.5, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr85e"]
-size = Vector2(89, 77)
+size = Vector2(89, 88)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23vdl"]
 atlas = ExtResource("2_d65cg")
@@ -81,6 +86,9 @@ animations = [{
 "name": &"default",
 "speed": 120.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh7tq"]
+size = Vector2(1265.2, 20)
 
 [node name="Room" type="Node2D"]
 position = Vector2(-10, 660)
@@ -187,7 +195,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(600, 825)
 
 [node name="DeathZoneShape" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(414.25, -647)
+position = Vector2(688.25, -647)
 shape = SubResource("RectangleShape2D_death")
 
 [node name="LoopManager" type="Node2D" parent="."]
@@ -214,6 +222,7 @@ offset_left = 42.0
 offset_top = -175.0
 offset_right = 369.0
 offset_bottom = -43.0
+theme_override_fonts/normal_font = ExtResource("2_lmja8")
 bbcode_enabled = true
 text = "[wave] print......................................................
 Stack Overflow-"
@@ -226,6 +235,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-10, 660)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
+visible = false
 offset_left = 894.0
 offset_top = 554.0
 offset_right = 983.0
@@ -241,6 +251,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(168, -123)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
+visible = false
 offset_left = 335.0
 offset_top = 532.0
 offset_right = 424.0
@@ -256,6 +267,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(385, -131)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
+visible = false
 offset_left = 127.0
 offset_top = 756.0
 offset_right = 216.0
@@ -271,6 +283,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(614, -262)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
+visible = false
 offset_left = 1051.0
 offset_top = 1244.0
 offset_right = 1140.0
@@ -286,6 +299,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(331, -391)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
+visible = false
 offset_left = -40.0
 offset_top = 928.0
 offset_right = 49.0
@@ -301,6 +315,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(31, -425)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
+visible = false
 offset_left = 780.0
 offset_top = 839.0
 offset_right = 869.0
@@ -312,15 +327,96 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(824, 880.5)
 shape = SubResource("RectangleShape2D_nr85e")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D6"]
+position = Vector2(2381, 819)
+shape = SubResource("RectangleShape2D_nr85e")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = -1
-position = Vector2(676, -49)
-scale = Vector2(30.1553, 25.5947)
+position = Vector2(971, 213)
+scale = Vector2(27.6875, 18.7656)
 sprite_frames = SubResource("SpriteFrames_lxe0y")
 autoplay = "default"
 frame_progress = 0.0834
+metadata/_edit_lock_ = true
 
 [node name="Code_Block" parent="." instance=ExtResource("3_gmlmv")]
-position = Vector2(2016, 53)
+position = Vector2(2642, -385)
 code_to_unlock = "print_unlocked"
 popup_text = "You can now use print() on the editor"
+
+[node name="Background2" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -761.0
+offset_top = -679.0
+offset_right = 2672.0
+offset_bottom = 1368.0
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+metadata/_edit_lock_ = true
+
+[node name="Missing" type="Sprite2D" parent="."]
+position = Vector2(568, 6)
+scale = Vector2(23.25, 19.75)
+texture = ExtResource("4_808v8")
+
+[node name="Missing2" type="Sprite2D" parent="."]
+position = Vector2(557, -205)
+scale = Vector2(23.25, 19.75)
+texture = ExtResource("4_808v8")
+
+[node name="Background2" type="ColorRect" parent="Missing2"]
+z_index = -20
+offset_left = -783.871
+offset_top = -646.785
+offset_right = 2649.13
+offset_bottom = 1400.22
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+metadata/_edit_lock_ = true
+
+[node name="Missing" type="Sprite2D" parent="Missing2"]
+position = Vector2(-9.07527, 6.17721)
+texture = ExtResource("4_808v8")
+
+[node name="Missing4" type="Sprite2D" parent="Missing2"]
+position = Vector2(-15.0538, 9.36709)
+texture = ExtResource("4_808v8")
+
+[node name="Missing5" type="Sprite2D" parent="Missing2"]
+position = Vector2(-34.1505, 7.08861)
+texture = ExtResource("4_808v8")
+
+[node name="Missing6" type="Sprite2D" parent="Missing2"]
+position = Vector2(-41.6344, -6.78481)
+texture = ExtResource("4_808v8")
+
+[node name="Missing2" type="Sprite2D" parent="Missing2"]
+position = Vector2(13.2903, -0.101267)
+texture = ExtResource("4_808v8")
+metadata/_edit_lock_ = true
+
+[node name="Missing3" type="Sprite2D" parent="Missing2"]
+position = Vector2(80.258, -3.18987)
+texture = ExtResource("4_808v8")
+
+[node name="Cursor" type="Sprite2D" parent="Missing2"]
+position = Vector2(26.0215, -17.4684)
+rotation = -0.251244
+scale = Vector2(0.41129, 0.549051)
+texture = ExtResource("5_ndl30")
+flip_h = true
+flip_v = true
+
+[node name="Notfound" type="Sprite2D" parent="Missing2"]
+position = Vector2(23.5699, 25.7722)
+texture = ExtResource("6_lmja8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1694.74, 93.0579)
+rotation = -0.59127
+shape = SubResource("RectangleShape2D_yh7tq")
+
+[node name="Node2D" parent="StaticBody2D" instance=ExtResource("7_ndl30")]
+position = Vector2(51.5, -59)
+scale = Vector2(5.28125, 4.6875)

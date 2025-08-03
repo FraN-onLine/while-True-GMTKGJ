@@ -21,6 +21,7 @@ var level_8_started = false
 var droppable_scene = preload("res://scenes/droppable.tscn")
 var riseable_scene = preload("res://scenes/riseable.tscn")
 var mob_scene = preload("res://scenes/Mob.tscn")
+var loop_font: Font = preload("res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf")
 var spawned_nodes: Array[Node] = []
 
 
@@ -151,6 +152,8 @@ func setup_level_elements():
 			hole = $"../Hole"
 			if anvil and anvil.has_method("setup_droppable"):
 				anvil.setup_droppable("anvil")
+				
+			await start_level1_intro()
 		2:
 			# Level 2: Setup card spawn points only (cards are spawned dynamically)
 			spawn_points = [
@@ -347,7 +350,8 @@ func start_cinematic_sequence():
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	label.modulate.a = 0
-	label.add_theme_font_size_override("font_size", 32)
+	label.add_theme_font_size_override("font_size", 22)
+	label.add_theme_font_override("font", loop_font)
 	label.anchor_left = 0
 	label.anchor_top = 0
 	label.anchor_right = 1
@@ -394,3 +398,64 @@ func type_text(label: Label, full_text: String, speed: float = 0.05) -> void:
 	for i in range(full_text.length()):
 		label.text += full_text[i]
 		await get_tree().create_timer(speed).timeout
+
+func start_level1_intro():
+	var messages = [
+		"You don't know what brought you here....",
+		"But you know one thing... you must break the loop...."
+	]
+
+	var ui_layer = CanvasLayer.new()
+	add_child(ui_layer)
+
+	var fade_rect = ColorRect.new()
+	fade_rect.color = Color(0, 0, 0, 1)
+	fade_rect.anchor_left = 0
+	fade_rect.anchor_top = 0
+	fade_rect.anchor_right = 1
+	fade_rect.anchor_bottom = 1
+	ui_layer.add_child(fade_rect)
+
+	var label = Label.new()
+	label.text = ""
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	label.modulate.a = 0
+	label.add_theme_font_size_override("font_size", 22)
+	label.add_theme_font_override("font", loop_font)
+	label.anchor_left = 0
+	label.anchor_top = 0
+	label.anchor_right = 1
+	label.anchor_bottom = 1
+	ui_layer.add_child(label)
+
+	# Fade in background
+	var fade_in_bg = create_tween()
+	fade_in_bg.tween_property(fade_rect, "modulate:a", 1.0, 1.0)
+	await fade_in_bg.finished
+
+	for message in messages:
+		# Fade in label
+		label.modulate = Color(1, 1, 1, 0)
+		var fade_in_label = create_tween()
+		fade_in_label.tween_property(label, "modulate:a", 1.0, 0.5)
+		await fade_in_label.finished
+
+		await type_text(label, message, 0.06)
+		await get_tree().create_timer(1.5).timeout
+
+		var fade_out_label = create_tween()
+		fade_out_label.tween_property(label, "modulate:a", 0.0, 0.8)
+		await fade_out_label.finished
+		label.text = ""
+
+	await get_tree().create_timer(0.5).timeout
+
+	# Fade out black overlay
+	var fade_out_bg = create_tween()
+	fade_out_bg.tween_property(fade_rect, "modulate:a", 0.0, 1.0)
+	await fade_out_bg.finished
+
+	ui_layer.queue_free()  # Cleanup overlay

@@ -1,7 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqkxy4yf8v85d"]
+[gd_scene load_steps=16 format=3 uid="uid://cqkxy4yf8v85d"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_ggc1m"]
 [ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="1_lebw1"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="2_dx04d"]
+[ext_resource type="Texture2D" uid="uid://pxqnxelsm74v" path="res://Assets/notfound.png" id="3_i5o81"]
+[ext_resource type="Texture2D" uid="uid://cvfg251wh24v" path="res://Assets/missing.png" id="4_ncf70"]
+[ext_resource type="Texture2D" uid="uid://b1kobfbxvosml" path="res://Assets/cursor.png" id="5_dx04d"]
+[ext_resource type="PackedScene" uid="uid://dpsejf4qjvvqb" path="res://scenes/nan_particle.tscn" id="6_ncf70"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(1087, 92.5)
@@ -37,6 +42,7 @@ offset_right = 1843.0
 offset_bottom = 801.0
 color = Color(0.2, 0.2, 0.3, 1)
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="FloorLeft" type="StaticBody2D" parent="."]
 position = Vector2(350, 750)
@@ -164,8 +170,10 @@ offset_left = 42.0
 offset_top = -175.0
 offset_right = 369.0
 offset_bottom = -43.0
+theme_override_fonts/normal_font = ExtResource("2_dx04d")
+theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-text = "[wave] Out of bounds Error...
+text = "[wave]Out of bounds Error...
 
 Expected \" at line 32: Label.text = \"For Developers: for each unique position an object appears within a scene; It is called n times within the loop"
 fit_content = true
@@ -177,6 +185,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-10, 660)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
+visible = false
 offset_left = 1867.0
 offset_top = -105.0
 offset_right = 1956.0
@@ -192,6 +201,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(168, -123)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
+visible = false
 offset_left = 1177.0
 offset_top = 639.0
 offset_right = 1266.0
@@ -207,6 +217,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(385, -131)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
+visible = false
 offset_left = 1051.0
 offset_top = 1244.0
 offset_right = 1140.0
@@ -222,6 +233,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(614, -262)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
+visible = false
 offset_left = 1557.0
 offset_top = 724.0
 offset_right = 1646.0
@@ -237,6 +249,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(331, -391)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
+visible = false
 offset_left = 513.0
 offset_top = 913.0
 offset_right = 602.0
@@ -252,6 +265,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(31, -425)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
+visible = false
 offset_left = 1050.0
 offset_top = 853.0
 offset_right = 1173.0
@@ -265,3 +279,51 @@ shape = SubResource("RectangleShape2D_nanhr")
 position = Vector2(2229, -369)
 code_to_unlock = "spawn_unlocked"
 popup_text = "You can now use spawn() on the editor"
+
+[node name="Background2" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -1208.0
+offset_top = -1219.0
+offset_right = 3322.0
+offset_bottom = 1415.0
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1153, -110.5)
+scale = Vector2(4.0625, 7.71875)
+texture = ExtResource("3_i5o81")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(899.219, -96.9844)
+scale = Vector2(22.3906, 19.9922)
+texture = ExtResource("4_ncf70")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(1397, -103)
+scale = Vector2(22.3906, 19.9922)
+texture = ExtResource("4_ncf70")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(1914, -62)
+scale = Vector2(22.3906, 19.9922)
+texture = ExtResource("4_ncf70")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(2226, -161)
+scale = Vector2(22.3906, 19.9922)
+texture = ExtResource("4_ncf70")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(1279, 35)
+scale = Vector2(4.28905, 4.46484)
+texture = ExtResource("5_dx04d")
+
+[node name="Node2D" parent="." instance=ExtResource("6_ncf70")]
+position = Vector2(899, -32)
+scale = Vector2(2.75, 2.28125)
+frame_progress = 0.90364
+
+[node name="Node2D2" parent="." instance=ExtResource("6_ncf70")]
+position = Vector2(1397, -150)
+scale = Vector2(2.75, 2.28125)
+frame_progress = 0.850632

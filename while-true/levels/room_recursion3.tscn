@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://rxnb6y62m4ai"]
+[gd_scene load_steps=17 format=3 uid="uid://rxnb6y62m4ai"]
 
+[ext_resource type="Texture2D" uid="uid://b1pfk02qnhuys" path="res://Assets/wallpaper.png" id="1_7bq4d"]
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_nr85e"]
+[ext_resource type="Texture2D" uid="uid://cqvhxsshdcl5x" path="res://Assets/desktop icons.png" id="2_1sil0"]
 [ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="3_1sil0"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="3_k1vv4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(598, 92.5)
@@ -21,15 +24,31 @@ size = Vector2(1190, 58)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
 size = Vector2(1200, 50)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bq4d"]
+atlas = ExtResource("2_1sil0")
+region = Rect2(0.592079, 0.691738, 30.6173, 28.0494)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1vv4"]
+atlas = ExtResource("2_1sil0")
+region = Rect2(0.197018, 33.2843, 31.4074, 30.6173)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugepn"]
+atlas = ExtResource("2_1sil0")
+region = Rect2(63.4069, 32.2967, 32.1975, 29.037)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1pi7"]
+atlas = ExtResource("2_1sil0")
+region = Rect2(33.7773, 34.8646, 30.0247, 27.0617)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr85e"]
 size = Vector2(89, 80)
 
 [node name="Room" type="Node2D"]
 
-[node name="Background" type="ColorRect" parent="."]
-offset_right = 1200.0
-offset_bottom = 800.0
-color = Color(0.2, 0.2, 0.3, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(596.5, 422)
+scale = Vector2(9.32031, 6)
+texture = ExtResource("1_7bq4d")
 
 [node name="FloorLeft" type="StaticBody2D" parent="."]
 position = Vector2(350, 750)
@@ -138,32 +157,54 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 159.0
-offset_top = 532.0
-offset_right = 486.0
-offset_bottom = 664.0
+offset_left = 152.0
+offset_top = 552.0
+offset_right = 479.0
+offset_bottom = 684.0
+theme_override_fonts/normal_font = ExtResource("3_k1vv4")
+theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-text = "[wave] Seems like this recursion has a missing block of code? obtain the code block then observe the loop"
+text = "[wave][color=black] Seems like this recursion has a missing block of code? obtain the code block then observe the loop"
 
 [node name="some parkour blocks" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="some parkour blocks"]
 
-[node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
-offset_left = 1061.0
-offset_top = 584.0
-offset_right = 1150.0
-offset_bottom = 666.0
-color = Color(0.301961, 0.105882, 0.133333, 1)
+[node name="ColorRect" type="Sprite2D" parent="some parkour blocks/StaticBody2D"]
+position = Vector2(1107, 624.313)
+scale = Vector2(3.1371, 2.88306)
+texture = SubResource("AtlasTexture_7bq4d")
+
+[node name="ColorRect2" type="Sprite2D" parent="some parkour blocks/StaticBody2D"]
+position = Vector2(937, 492)
+scale = Vector2(3.1371, 2.88306)
+texture = SubResource("AtlasTexture_7bq4d")
+
+[node name="ColorRect3" type="Sprite2D" parent="some parkour blocks/StaticBody2D"]
+position = Vector2(669, 490)
+scale = Vector2(3.1371, 2.88306)
+texture = SubResource("AtlasTexture_k1vv4")
+
+[node name="ColorRect4" type="Sprite2D" parent="some parkour blocks/StaticBody2D"]
+position = Vector2(404, 384)
+scale = Vector2(3.1371, 2.88306)
+texture = SubResource("AtlasTexture_ugepn")
+
+[node name="ColorRect5" type="Sprite2D" parent="some parkour blocks/StaticBody2D"]
+position = Vector2(188, 307)
+scale = Vector2(3.1371, 2.88306)
+texture = SubResource("AtlasTexture_i1pi7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D"]
 position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(-172, -132)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -178,6 +219,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(-434, -137)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -192,6 +234,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(-701, -236)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -206,6 +249,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(-916, -316)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -218,3 +262,52 @@ shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="Code_Block" parent="." instance=ExtResource("3_1sil0")]
 position = Vector2(87, 312)
+
+[node name="Background2" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -768.0
+offset_top = -572.0
+offset_right = 2665.0
+offset_bottom = 1475.0
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+metadata/_edit_lock_ = true
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 153.0
+offset_top = 348.0
+offset_right = 223.0
+offset_bottom = 375.0
+theme_override_font_sizes/font_size = 19
+text = "Discord"
+
+[node name="Label8" type="Label" parent="."]
+offset_left = 613.0
+offset_top = 536.0
+offset_right = 734.0
+offset_bottom = 563.0
+theme_override_font_sizes/font_size = 19
+text = "Recycling Bin"
+
+[node name="Label10" type="Label" parent="."]
+offset_left = 1058.0
+offset_top = 660.0
+offset_right = 1179.0
+offset_bottom = 687.0
+theme_override_font_sizes/font_size = 19
+text = "Lyn's Corn"
+
+[node name="Label11" type="Label" parent="."]
+offset_left = 889.0
+offset_top = 531.0
+offset_right = 1000.0
+offset_bottom = 577.0
+theme_override_font_sizes/font_size = 19
+text = "Rayn's WIPS"
+
+[node name="Label9" type="Label" parent="."]
+offset_left = 368.0
+offset_top = 425.0
+offset_right = 460.0
+offset_bottom = 452.0
+theme_override_font_sizes/font_size = 19
+text = "Chrome"

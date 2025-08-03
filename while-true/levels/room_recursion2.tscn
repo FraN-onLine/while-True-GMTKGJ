@@ -1,20 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://o0r0hwtawlmq"]
+[gd_scene load_steps=10 format=3 uid="uid://o0r0hwtawlmq"]
 
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_loop_manager"]
+[ext_resource type="Texture2D" uid="uid://cubjbpa53wlsj" path="res://Assets/Background/city 5/7.png" id="2_8jvti"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="2_v6fmi"]
+[ext_resource type="Texture2D" uid="uid://b1kobfbxvosml" path="res://Assets/cursor.png" id="3_v6fmi"]
+[ext_resource type="Texture2D" uid="uid://cqvhxsshdcl5x" path="res://Assets/desktop icons.png" id="4_m7j5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
-size = Vector2(1200, 100)
+size = Vector2(1200, 91)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21y47"]
 size = Vector2(47, 805)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuu2o"]
+atlas = ExtResource("4_m7j5a")
+region = Rect2(30.6652, -0.889256, 67.1163, 33.2969)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtrkb"]
+atlas = ExtResource("4_m7j5a")
+region = Rect2(63.462, 33.853, 32.6444, 27.5004)
+
 [node name="Room" type="Node2D"]
 
 [node name="Background" type="ColorRect" parent="."]
+z_index = -2
 offset_left = 4.0
 offset_top = 32.0
-offset_right = 1204.0
-offset_bottom = 832.0
+offset_right = 1196.0
+offset_bottom = 796.0
 color = Color(0.1, 0.2, 0.3, 1)
 
 [node name="Floor" type="StaticBody2D" parent="."]
@@ -28,19 +41,11 @@ offset_bottom = 50.0
 color = Color(0.3, 0.4, 0.2, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_floor")
 
 [node name="LoopManager" type="Node2D" parent="."]
 script = ExtResource("1_loop_manager")
-
-[node name="ConditionalIndicator" type="Label" parent="LoopManager"]
-offset_left = 600.0
-offset_top = 50.0
-offset_right = 600.0
-offset_bottom = 50.0
-text = "Level 2: Conditional Logic"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CardDropRight" type="Marker2D" parent="LoopManager"]
 position = Vector2(900, 100)
@@ -93,14 +98,55 @@ offset_bottom = 25.0
 color = Color(0.1, 0.1, 0.1, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 66.0
-offset_top = 459.0
-offset_right = 476.0
-offset_bottom = 645.0
+offset_left = 64.0
+offset_top = 423.0
+offset_right = 474.0
+offset_bottom = 683.0
+theme_override_fonts/normal_font = ExtResource("2_v6fmi")
+theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-text = "[wave] maybe one glance at the loop is not enough, try playing with the conditional statements?
+text = "[wave]maybe one glance at the loop is not enough, try playing with the conditional statements?
 
-If Blocks: will trigger one code block below if the condition is met
+If Blocks: will trigger ONE code block below if the condition is met
 Hint:  
-Greater than(>) only occurs if i is greater than j
-Modulo(%) only occurs if i is divisible by j"
+Greater than(>) only occurs after n loops, e.g. > 5 happens when looped 5 times or more
+
+Modulo(%) only occurs every nth loop e.g. % 2 happens every second loop"
+
+[node name="Background2" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -780.0
+offset_top = -618.0
+offset_right = 2653.0
+offset_bottom = 1429.0
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+metadata/_edit_lock_ = true
+
+[node name="7" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.227451)
+z_index = -1
+position = Vector2(606, 394)
+scale = Vector2(0.496962, 0.561728)
+texture = ExtResource("2_8jvti")
+
+[node name="Cursor" type="Sprite2D" parent="."]
+position = Vector2(298, 645)
+texture = ExtResource("3_v6fmi")
+
+[node name="Cursor2" type="Sprite2D" parent="."]
+position = Vector2(1034.38, 748)
+scale = Vector2(2.93657, 2.62121)
+texture = SubResource("AtlasTexture_iuu2o")
+
+[node name="Cursor3" type="Sprite2D" parent="."]
+position = Vector2(1095, 118)
+scale = Vector2(2.93657, 2.62121)
+texture = SubResource("AtlasTexture_jtrkb")
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 1061.0
+offset_top = 152.0
+offset_right = 1135.0
+offset_bottom = 179.0
+theme_override_font_sizes/font_size = 19
+text = "Chrome"

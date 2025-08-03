@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bf427trq80wtr"]
 
 [ext_resource type="Script" uid="uid://crm368njypl6a" path="res://resources/item.gd" id="1_item"]
-
+[ext_resource type="Texture2D" uid="uid://bmngyokp7xvl3" path="res://Assets/Anvil.png" id="2_rkoso"]
 
 [resource]
 script = ExtResource("1_item")
 name = "anvil"
+texture = ExtResource("2_rkoso")
 color = Color(0.6, 0.3, 0.1, 1)
 size = Vector2(60, 40)
-label = "Anvil" 
+label = "Anvil"

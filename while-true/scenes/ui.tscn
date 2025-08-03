@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://rkeyx6m6kl68"]
+[gd_scene load_steps=6 format=3 uid="uid://rkeyx6m6kl68"]
 
 [ext_resource type="Script" uid="uid://ssars4vf8ve5" path="res://scripts/ui.gd" id="1_ui"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="2_x4jx1"]
+
+[sub_resource type="Animation" id="Animation_x4jx1"]
+resource_name = "new_animation"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, 20), Vector2(400, 15)]
+}
+
+[sub_resource type="Animation" id="Animation_yev5y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdt2y"]
+_data = {
+&"RESET": SubResource("Animation_yev5y"),
+&"new_animation": SubResource("Animation_x4jx1")
+}
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ui")
@@ -9,10 +48,12 @@ script = ExtResource("1_ui")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -100.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 46.0
+offset_left = -155.0
+offset_top = 16.0
+offset_right = -43.0
+offset_bottom = 42.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_x4jx1")
 text = "Level 1"
 horizontal_alignment = 2
 
@@ -21,8 +62,15 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -200.0
-offset_top = 20.0
-offset_right = 200.0
-offset_bottom = 46.0
+offset_top = 15.0618
+offset_right = 280.0
+offset_bottom = 35.0618
+theme_override_fonts/font = ExtResource("2_x4jx1")
 text = "Press ESC to open code editor!"
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Instructions"]
+libraries = {
+&"": SubResource("AnimationLibrary_gdt2y")
+}
+autoplay = "new_animation"

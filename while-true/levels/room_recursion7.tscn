@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://i6gpa564cofm"]
+[gd_scene load_steps=20 format=3 uid="uid://i6gpa564cofm"]
 
+[ext_resource type="Texture2D" uid="uid://22i0kgeki1ne" path="res://Assets/wallpaper-2.png" id="1_eu8x6"]
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_gm4cx"]
 [ext_resource type="PackedScene" uid="uid://1go58hnlql6q" path="res://scenes/code_block.tscn" id="2_05jqc"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="3_yys3e"]
+[ext_resource type="Texture2D" uid="uid://b1kobfbxvosml" path="res://Assets/cursor.png" id="4_v36g2"]
+[ext_resource type="Texture2D" uid="uid://cqvhxsshdcl5x" path="res://Assets/desktop icons.png" id="5_v36g2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(1087, 92.5)
@@ -27,14 +31,33 @@ size = Vector2(89, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gm4cx"]
 size = Vector2(113, 107)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yys3e"]
+atlas = ExtResource("5_v36g2")
+region = Rect2(-0.435829, -2.89669, 31.8126, 35.4933)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qebmm"]
+atlas = ExtResource("5_v36g2")
+region = Rect2(63.2937, 32.2232, 32.8642, 30.498)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_welon"]
+atlas = ExtResource("5_v36g2")
+region = Rect2(31.2094, 32.0991, 34.1728, 32.243)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtxei"]
+atlas = ExtResource("5_v36g2")
+region = Rect2(64.1653, -3.01731, 35.3825, 33.2227)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xiek4"]
+atlas = ExtResource("5_v36g2")
+region = Rect2(1.49538, 32.9347, 29.037, 31.4074)
+
 [node name="Room" type="Node2D"]
 
-[node name="Background" type="ColorRect" parent="."]
-offset_left = 47.0
-offset_top = -2.0
-offset_right = 1848.0
-offset_bottom = 798.0
-color = Color(0.2, 0.2, 0.3, 1)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(925, 358.5)
+scale = Vector2(13.625, 5.38281)
+texture = ExtResource("1_eu8x6")
+metadata/_edit_lock_ = true
 
 [node name="FloorLeft" type="StaticBody2D" parent="."]
 position = Vector2(350, 750)
@@ -146,8 +169,10 @@ offset_left = 129.0
 offset_top = 509.0
 offset_right = 456.0
 offset_bottom = 675.0
+theme_override_fonts/normal_font = ExtResource("3_yys3e")
+theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-text = "[wave] Recursion terminated..... Texture of Platform7 failed to load
+text = "[wave]Recursion terminated..... Texture of Platform7 failed to load
 
 Returning to last stable version...
 Ability to use rise()  and spawn() revoked,
@@ -158,6 +183,7 @@ Error: Input Map is erratic, proceed with caution"
 [node name="StaticBody2D" type="StaticBody2D" parent="some parkour blocks"]
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D"]
+visible = false
 offset_left = 850.0
 offset_top = 395.0
 offset_right = 939.0
@@ -167,11 +193,13 @@ color = Color(0.301961, 0.105882, 0.133333, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D"]
 position = Vector2(888, 435)
 shape = SubResource("RectangleShape2D_nr85e")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(168, -123)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D2"]
+visible = false
 offset_left = 1023.0
 offset_top = 595.0
 offset_right = 1112.0
@@ -181,11 +209,13 @@ color = Color(0.301961, 0.105882, 0.133333, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D2"]
 position = Vector2(1065, 635)
 shape = SubResource("RectangleShape2D_nr85e")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(385, -131)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D3"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -195,11 +225,13 @@ color = Color(0.301961, 0.105882, 0.133333, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D3"]
 position = Vector2(1106, 625)
 shape = SubResource("RectangleShape2D_nr85e")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="some parkour blocks"]
 position = Vector2(614, -262)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D4"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -214,6 +246,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(326, -348)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D5"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -228,6 +261,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(31, -425)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D6"]
+visible = false
 offset_left = 1061.0
 offset_top = 584.0
 offset_right = 1150.0
@@ -242,6 +276,7 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(573, -474)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D7"]
+visible = false
 offset_left = 416.0
 offset_top = 985.0
 offset_right = 505.0
@@ -266,3 +301,137 @@ position = Vector2(886, 358)
 position = Vector2(47, -58)
 code_to_unlock = "spawn_unlocked"
 popup_text = "You can now use spawn() on the editor"
+
+[node name="Background2" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -780.0
+offset_top = -618.0
+offset_right = 2653.0
+offset_bottom = 1429.0
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+metadata/_edit_lock_ = true
+
+[node name="Cursor" type="Sprite2D" parent="."]
+position = Vector2(1613, 95)
+texture = ExtResource("4_v36g2")
+flip_h = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(888, 434)
+scale = Vector2(3.01613, 2.61429)
+texture = SubResource("AtlasTexture_yys3e")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = -21.5508
+offset_top = 16.8306
+offset_right = 24.4492
+offset_bottom = 39.8306
+theme_override_font_sizes/font_size = 7
+text = "Project - Final"
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+offset_left = 14.5882
+offset_top = 60.4372
+offset_right = 77.5882
+offset_bottom = 83.4371
+theme_override_font_sizes/font_size = 7
+text = "Project - Final Real"
+
+[node name="Label3" type="Label" parent="Sprite2D"]
+offset_left = 85.2086
+offset_top = 45.5191
+offset_right = 148.209
+offset_bottom = 68.5191
+theme_override_font_sizes/font_size = 7
+text = "Project - Final(88)"
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(888, 434)
+scale = Vector2(3.01613, 2.61429)
+texture = SubResource("AtlasTexture_yys3e")
+
+[node name="Label" type="Label" parent="Sprite2D2"]
+offset_left = -21.5508
+offset_top = 16.8306
+offset_right = 24.4492
+offset_bottom = 39.8306
+theme_override_font_sizes/font_size = 7
+text = "Project - Final"
+
+[node name="Label2" type="Label" parent="Sprite2D2"]
+offset_left = 14.5882
+offset_top = 60.4372
+offset_right = 77.5882
+offset_bottom = 83.4371
+theme_override_font_sizes/font_size = 7
+text = "Project - Final Real"
+
+[node name="Label3" type="Label" parent="Sprite2D2"]
+offset_left = 85.2086
+offset_top = 45.5191
+offset_right = 148.209
+offset_bottom = 68.5191
+theme_override_font_sizes/font_size = 7
+text = "Project - Final(88)"
+
+[node name="Label4" type="Label" parent="Sprite2D2"]
+offset_left = 186.0
+offset_top = 38.6339
+offset_right = 249.0
+offset_bottom = 61.6339
+theme_override_font_sizes/font_size = 7
+text = "Chrome"
+
+[node name="Label5" type="Label" parent="Sprite2D2"]
+offset_left = 161.465
+offset_top = -40.5465
+offset_right = 224.465
+offset_bottom = -17.5465
+theme_override_font_sizes/font_size = 7
+text = "Computer"
+
+[node name="Label7" type="Label" parent="Sprite2D2"]
+offset_left = 263.251
+offset_top = -9.94536
+offset_right = 326.251
+offset_bottom = 13.0546
+theme_override_font_sizes/font_size = 7
+text = "Discord"
+
+[node name="Label6" type="Label" parent="Sprite2D2"]
+offset_left = 71.615
+offset_top = -71.9126
+offset_right = 134.615
+offset_bottom = -48.9126
+theme_override_font_sizes/font_size = 7
+text = "Trash"
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(1028, 545)
+scale = Vector2(3.01613, 2.61429)
+texture = SubResource("AtlasTexture_yys3e")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(1234, 511)
+scale = Vector2(3.01613, 2.61429)
+texture = SubResource("AtlasTexture_yys3e")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(1491, 494.696)
+scale = Vector2(3.01613, 3.02024)
+texture = SubResource("AtlasTexture_qebmm")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(1718, 363)
+scale = Vector2(3.01613, 3.02024)
+texture = SubResource("AtlasTexture_welon")
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(1425, 274)
+scale = Vector2(3.01613, 3.02024)
+texture = SubResource("AtlasTexture_gtxei")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(1134, 201)
+scale = Vector2(3.01613, 3.02024)
+texture = SubResource("AtlasTexture_xiek4")

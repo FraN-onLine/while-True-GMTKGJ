@@ -16,10 +16,15 @@ func _process(delta):
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		global_position += direction * move_speed * delta
-	
+
+		# Flip sprite based on horizontal movement
+		if abs(direction.x) > 0.01:
+			$AnimatedSprite2D.flip_h = direction.x < 0
+
 	timer -= delta
 	if timer <= 0:
-		self.queue_free()
+		queue_free()
+
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):

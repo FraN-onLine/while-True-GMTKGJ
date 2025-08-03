@@ -13,20 +13,25 @@ func _ready():
 	quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_start_pressed():
+	$AudioStreamPlayer2D.play()
+	Global.current_level = 1
 	# Load the main game scene
 	get_tree().change_scene_to_file("res://scenes/main_game.tscn")
 
 func _on_instructions_pressed():
 	# Show instructions dialog
 	show_instructions()
+	$AudioStreamPlayer2D.play()
 
 func _on_settings_pressed():
 	# Show settings dialog
 	show_settings()
+	$AudioStreamPlayer2D.play()
 
 func _on_quit_pressed():
 	# Quit the game
 	get_tree().quit()
+	$AudioStreamPlayer2D.play()
 
 func show_instructions():
 	# Create a simple instructions dialog
@@ -58,7 +63,7 @@ func show_settings():
 	dialog.title = "Settings"
 	dialog.dialog_text = """
 	Settings
-	
+	Lol YOU THOUGHT-????, 
 	"""
 	add_child(dialog)
 	dialog.popup_centered() 

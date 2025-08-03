@@ -6,7 +6,6 @@ var direction := Vector2.ZERO
 var player_camera: Camera2D = null
 
 @onready var sprite = $Sprite2D
-@onready var label = $Label
 
 var item: Item
 
@@ -43,13 +42,7 @@ func setup_droppable_with_item(resource: Item):
 
 func apply_item():
 	if item:
-		sprite.color = item.color
-		sprite.size = item.size
-		sprite.offset_left = -item.size.x / 2
-		sprite.offset_top = -item.size.y / 2
-		sprite.offset_right = item.size.x / 2
-		sprite.offset_bottom = item.size.y / 2
-		label.text = item.label
+		sprite.texture = item.texture
 
 func setup_default_droppable(type: String):
 	# Default configuration for unknown types
@@ -59,7 +52,6 @@ func setup_default_droppable(type: String):
 	sprite.offset_top = -25
 	sprite.offset_right = 25
 	sprite.offset_bottom = 25
-	label.text = type.capitalize()
 
 func get_resource_name() -> String:
 	if item:

@@ -210,8 +210,6 @@ func add_function_block(block_name: String, block_data: Dictionary):
 	remove_button.pressed.connect(_on_remove_block.bind(block_container))
 	inner_container.add_child(remove_button)
 
-	make_draggable(block_container)
-
 	code_blocks.add_child(block_container)
 	current_code.append({"type": block_name, "container": block_container})
 
@@ -268,9 +266,6 @@ func add_conditional_block(block_name: String, block_data: Dictionary):
 	content_container.offset_left = 20.0
 	
 	inner_container.add_child(content_container)
-	
-	# Make block draggable
-	make_draggable(conditional_container)
 	
 	code_blocks.add_child(conditional_container)
 	current_code.append({"type": block_name, "container": conditional_container, "content": content_container, "condition_type": condition_type_dropdown, "number_input": number_input})
@@ -334,7 +329,7 @@ func _on_test_pressed():
 		status_label.text = "Code is correct! Press 'Break Loop' to complete the level."
 		break_button.disabled = false
 	else:
-		status_label.text = "Code is incorrect. Expected: " + str(Global.current_sequence) + " Got: " + str(converted_sequence)
+		status_label.text = "Code is incorrect. Observe the Sequence Thoroughly"
 		break_button.disabled = true
 
 func get_code_sequence() -> Array:
@@ -555,11 +550,6 @@ func create_button_style() -> StyleBoxFlat:
 	style.corner_radius_bottom_left = 3
 	style.corner_radius_bottom_right = 3
 	return style
-
-# Dragging functions
-func make_draggable(block: Control):
-	block.mouse_filter = Control.MOUSE_FILTER_STOP
-	block.gui_input.connect(_on_block_gui_input.bind(block))
 
 func _on_block_gui_input(event: InputEvent, block: Control):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

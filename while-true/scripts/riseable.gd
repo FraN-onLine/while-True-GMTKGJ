@@ -2,7 +2,6 @@ extends StaticBody2D
 class_name RisingObstacle
 
 @onready var sprite := $Sprite2D
-@onready var label := $Label
 
 var start_position := Vector2.ZERO
 var target_position := Vector2.ZERO
@@ -19,8 +18,6 @@ func setup_riseable(type: String):
 		queue_free()
 		return
 
-	sprite.color = data.color
-	label.text = data.label
 
 func _process(delta):
 	position += direction * rise_speed * delta

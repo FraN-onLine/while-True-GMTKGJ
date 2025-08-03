@@ -1,27 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6q0brwuj8u8"]
+[gd_scene load_steps=9 format=3 uid="uid://b6q0brwuj8u8"]
 
 [ext_resource type="Script" uid="uid://b1usffvcejc07" path="res://scripts/riseable.gd" id="1_ud41w"]
+[ext_resource type="Texture2D" uid="uid://dow8lsgfwywlj" path="res://Assets/virus_spriteSheet.png" id="2_xvknb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybt2u"]
+atlas = ExtResource("2_xvknb")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agbf2"]
+atlas = ExtResource("2_xvknb")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edo87"]
+atlas = ExtResource("2_xvknb")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75scd"]
+atlas = ExtResource("2_xvknb")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l6dao"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybt2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agbf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edo87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75scd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63xtw"]
+size = Vector2(62, 58)
 
 [node name="Riseable" type="StaticBody2D"]
 script = ExtResource("1_ud41w")
 
-[node name="Sprite2D" type="ColorRect" parent="."]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-color = Color(0.5, 0.5, 0.5, 1)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -30.0
-offset_top = -30.0
-offset_right = 30.0
-offset_bottom = -10.0
-text = "Card"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-5, -12)
+scale = Vector2(0.174805, 0.21582)
+sprite_frames = SubResource("SpriteFrames_l6dao")
+autoplay = "default"
+frame_progress = 0.676937
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_63xtw")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhkv3bhgvjnj"]
+[gd_scene load_steps=10 format=3 uid="uid://dhkv3bhgvjnj"]
 
+[ext_resource type="Texture2D" uid="uid://cfh1xvcca7xqj" path="res://Assets/Background/city 1.1/11.png" id="1_667bt"]
 [ext_resource type="Script" uid="uid://uwkog7apesq5" path="res://scripts/loop_manager.gd" id="1_loop_manager"]
 [ext_resource type="PackedScene" uid="uid://jlpkujhqdbs7" path="res://scenes/droppable.tscn" id="2_droppable"]
+[ext_resource type="FontFile" uid="uid://cyo4hmx70iwwv" path="res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf" id="4_jh13h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffxv4"]
 size = Vector2(648, 97)
@@ -20,10 +22,11 @@ size = Vector2(1200, 50)
 
 [node name="Room" type="Node2D"]
 
-[node name="Background" type="ColorRect" parent="."]
-offset_right = 1200.0
-offset_bottom = 800.0
-color = Color(0.2, 0.2, 0.3, 1)
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.866667)
+position = Vector2(596.5, 397)
+scale = Vector2(0.516927, 0.615741)
+texture = ExtResource("1_667bt")
 
 [node name="FloorLeft" type="StaticBody2D" parent="."]
 position = Vector2(350, 750)
@@ -128,10 +131,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 60.0
-offset_top = 440.0
-offset_right = 387.0
-offset_bottom = 572.0
+offset_left = 77.0
+offset_top = 495.0
+offset_right = 404.0
+offset_bottom = 681.0
+theme_override_fonts/normal_font = ExtResource("4_jh13h")
+theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-text = "[wave] Everything in this world runs on a loop... record what happens and break the cycle...
-There will be no indicator when a loop starts or ends, keep your eyes peeled"
+text = "[wave]Everything in this world runs on a loop... record what happens and break the cycle...
+
+There will be no indicator when a loop starts or ends, keep your eyes peeled
+
+Press [Esc] and Input the Observed Sequence"
+
+[node name="Background2" type="ColorRect" parent="."]
+z_index = -20
+offset_left = -780.0
+offset_top = -618.0
+offset_right = 2653.0
+offset_bottom = 1429.0
+color = Color(0.0116689, 0.00456869, 0.0532089, 1)
+metadata/_edit_lock_ = true

@@ -1,7 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp8seqswxtvgw"]
+[gd_scene load_steps=15 format=3 uid="uid://bx1qyrepsj3ku"]
 
 [ext_resource type="Script" uid="uid://bs1ohifbqy43r" path="res://scripts/title_screen.gd" id="1_hi24f"]
+[ext_resource type="Texture2D" uid="uid://cgtni77d37is8" path="res://Assets/title2.png" id="2_htv47"]
 [ext_resource type="PackedScene" uid="uid://cmlcj4skxmyag" path="res://scenes/red_particle.tscn" id="2_km27i"]
+[ext_resource type="Texture2D" uid="uid://cmbku4fojqa1j" path="res://Assets/UI/PNG/Blue/Default/button_rectangle_gradient.png" id="4_0hfc8"]
+[ext_resource type="Texture2D" uid="uid://cyp8rihxrw5ph" path="res://Assets/UI/PNG/Blue/Default/button_rectangle_depth_border.png" id="5_ff6ld"]
+[ext_resource type="Texture2D" uid="uid://bg5hao4st8nlp" path="res://Assets/UI/PNG/Blue/Default/button_rectangle_depth_flat.png" id="6_lwtuu"]
+[ext_resource type="AudioStream" uid="uid://x1nquwvr0juy" path="res://Assets/UI/Sounds/click-b.ogg" id="7_q2cyv"]
+[ext_resource type="Texture2D" uid="uid://cqpobm4l0gbyq" path="res://Assets/title-screen2.jpg" id="9_0hfc8"]
+
+[sub_resource type="Animation" id="Animation_0hfc8"]
+resource_name = "new_animation"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(142, 42.5), Vector2(142, 39)]
+}
+
+[sub_resource type="Animation" id="Animation_ff6ld"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(142, 42.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lwtuu"]
+_data = {
+&"RESET": SubResource("Animation_ff6ld"),
+&"new_animation": SubResource("Animation_0hfc8")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3yumr"]
+texture = ExtResource("4_0hfc8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dc4i4"]
+texture = ExtResource("5_ff6ld")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e54dn"]
+texture = ExtResource("6_lwtuu")
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -12,15 +65,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hi24f")
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.1, 0.1, 0.2, 1)
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -28,51 +72,96 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-offset_bottom = 150.0
+offset_left = -162.0
+offset_top = -177.5
+offset_right = 162.0
+offset_bottom = 177.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-text = "While (Player):"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Subtitle" type="Label" parent="VBoxContainer"]
+[node name="Title1" type="Sprite2D" parent="VBoxContainer/VBoxContainer2"]
+position = Vector2(142, 42.5)
+scale = Vector2(0.202083, 0.241741)
+texture = ExtResource("2_htv47")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/VBoxContainer2/Title1"]
+libraries = {
+&"": SubResource("AnimationLibrary_lwtuu")
+}
+autoplay = "new_animation"
+
+[node name="Spacer1" type="Control" parent="VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Loop Breaking Puzzle Game"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Spacer1" type="Control" parent="VBoxContainer"]
+[node name="Spacer2" type="Control" parent="VBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_3yumr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dc4i4")
+theme_override_styles/normal = SubResource("StyleBoxTexture_e54dn")
 text = "Start Game"
 
 [node name="InstructionsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Instructions"
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_3yumr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dc4i4")
+theme_override_styles/normal = SubResource("StyleBoxTexture_e54dn")
+text = "Instruction
+"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_3yumr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dc4i4")
+theme_override_styles/normal = SubResource("StyleBoxTexture_e54dn")
+text = "Settings
+"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_3yumr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dc4i4")
+theme_override_styles/normal = SubResource("StyleBoxTexture_e54dn")
+text = "Quit Game"
 
-[node name="Node2D" parent="VBoxContainer" instance=ExtResource("2_km27i")]
-position = Vector2(7.5, 224.75)
-scale = Vector2(4.03125, 3.01563)
-frame_progress = 0.202943
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_q2cyv")
+volume_db = 24.0
 
-[node name="Node2D2" parent="VBoxContainer" instance=ExtResource("2_km27i")]
-position = Vector2(405, 78)
-scale = Vector2(2.40625, 2.14062)
-frame_progress = 0.590605
+[node name="Node2D" parent="." instance=ExtResource("2_km27i")]
+z_index = -2
+position = Vector2(635.875, 343)
+scale = Vector2(49.6172, 38.9531)
+frame_progress = 0.658132
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -3
+layout_mode = 0
+offset_left = -470.0
+offset_top = -131.0
+offset_right = 1687.0
+offset_bottom = 1089.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -3
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+z_index = -2
+position = Vector2(597.5, 400.5)
+scale = Vector2(0.250208, 0.251563)
+texture = ExtResource("9_0hfc8")
+metadata/_edit_lock_ = true
