@@ -394,7 +394,11 @@ func convert_code_to_sequence(code_sequence: Array) -> Array:
 				var param = code.split("(")[1].split(")")[0]
 				converted.append(param + "_spawn")
 			elif code.begins_with("print("):
-				converted.append("hello_world_print")
+				if Global.current_level == 6:
+					converted.append("hello_world_print")
+				else:
+					var param = code.split("(")[1].split(")")[0]
+					converted.append(param + "_print")
 	else:
 		for code in code_sequence:
 			if code.begins_with("drop("):

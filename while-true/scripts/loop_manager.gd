@@ -1,6 +1,5 @@
 extends Node2D
-
-@onready var anvil = $Anvil
+var anvil
 @onready var hole = $"../Hole"
 
 var current_event_index: int = 0
@@ -137,6 +136,7 @@ func setup_level_elements():
 	match Global.current_level:
 		1:
 			# Level 1: Setup anvil and hole
+			anvil = $Anvil
 			if anvil and anvil.has_method("setup_droppable"):
 				anvil.setup_droppable("anvil")
 		2:

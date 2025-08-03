@@ -57,8 +57,8 @@ func load_level(level_number: int):
 			allowed_items = ["Hello World"]
 		7:
 			loop_duration = 5.0
-			current_sequence = ["mob_spawn", "mob_spawn", "mob_spawn", "mob_spawn"]
-			allowed_items = ["mob"]
+			current_sequence = ["virus_rise", "mob_spawn","virus_rise", "mob_spawn", "Leave!_print"]
+			allowed_items = ["virus","mob","Leave!"]
 		_:
 			loop_duration = 5.0
 			current_sequence = []
@@ -80,7 +80,7 @@ func submit_sequence():
 		level_completed.emit()
 		return true
 	else:
-		print("Incorrect sequence. Expected: ", current_sequence, " Got: ", detected_sequence)
+		print("Incorrect sequence. Please Observe the Events Thoroughly!")
 		detected_sequence.clear()
 		return false
 
