@@ -42,7 +42,7 @@ func setup_droppable_with_item(resource: Item):
 
 func apply_item():
 	if item:
-		sprite.texture = item.texture
+		pass
 
 func setup_default_droppable(type: String):
 	# Default configuration for unknown types

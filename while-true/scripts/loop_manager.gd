@@ -19,6 +19,7 @@ var level_8_started = false
 
 # Droppable resources
 var droppable_scene = preload("res://scenes/droppable.tscn")
+var droppable_scene2 = preload("res://scenes/droppable2.tscn")
 var riseable_scene = preload("res://scenes/riseable.tscn")
 var mob_scene = preload("res://scenes/Mob.tscn")
 var loop_font: Font = preload("res://Assets/UI/Font/Press_Start_2P/PressStart2P-Regular.ttf")
@@ -208,11 +209,11 @@ func spawn_card():
 	print("Spawning card at spawn point ", current_spawn_index, " at position ", spawn_point.global_position)
 
 	# Create card droppable
-	var card = droppable_scene.instantiate()
+	var card = droppable_scene2.instantiate()
 	card.global_position = spawn_point.global_position
 	card.direction = Vector2.DOWN
 	get_tree().current_scene.add_child(card)
-	card.setup_droppable("Card")
+	card.setup_droppable("card")
 	spawned_nodes.append(card)  # in spawn_card
 
 	# Move to next spawn point for next card
