@@ -1,12 +1,12 @@
 extends Node2D
 var anvil
-@onready var hole = $"../Hole"
+var hole
 
 var current_event_index: int = 0
 var event_timer: float = 0.0
 var event_duration: float = 1.1  # Duration of each event
 var loop_counter: int = 1  # Hidden counter for loop iterations
-
+var leave_label_scene = preload("res://scenes/leave_label.tscn")
 # Animation states
 var anvil_falling: bool = false
 var card_falling: bool = false
@@ -66,6 +66,8 @@ func play_next_event():
 				play_virus_rise()
 			"mob_spawn":
 				play_mob_spawn()
+			"Leave!_print":
+				play_leave_label()
 			_:
 				if Global.current_level == 3:
 					if event.begins_with("if__"):
@@ -137,6 +139,7 @@ func setup_level_elements():
 		1:
 			# Level 1: Setup anvil and hole
 			anvil = $Anvil
+			hole = $"../Hole"
 			if anvil and anvil.has_method("setup_droppable"):
 				anvil.setup_droppable("anvil")
 		2:
@@ -152,6 +155,7 @@ func setup_level_elements():
 			# Reset spawn index
 			current_spawn_index = 0
 		3:
+			hole = $"../Hole"
 			# Level 3: Setup hole and virus rise
 			spawn_points = [
 				get_node_or_null("Rise1"),
@@ -159,6 +163,7 @@ func setup_level_elements():
 			]
 			current_spawn_index = 0
 		4:
+			hole = $"../Hole"
 			spawn_points = [
 				get_node_or_null("Rise1"),
 				get_node_or_null("Rise2")
@@ -172,7 +177,14 @@ func setup_level_elements():
 				get_node_or_null("Spawn4")
 			]
 			current_spawn_index = 0
-
+		7:
+			spawn_points = [
+				get_node_or_null("Rise1"),
+				get_node_or_null("Spawn1"),
+				get_node_or_null("Rise2"),
+				get_node_or_null("Spawn2")
+			]
+			current_spawn_index = 0
 func spawn_card():
 	if spawn_points.size() == 0:
 		print("No spawn points found for cards!")
@@ -235,6 +247,23 @@ func play_hole_close():
 	print("Hole closing!")
 	hole.visible = true
 	$"../Hole/HoleShape".disabled = false
+	
+func play_leave_label():
+	print("Leave!? label shown!")
+	var label_instance = leave_label_scene.instantiate()
+	
+	# Position the label at the player's global position
+	var player = get_tree().get_nodes_in_group("Player")[0] # adjust path if needed
+	if player:
+		label_instance.global_position = player.global_position
+	else:
+		print("Player not found!")
+		return
+	
+	# Optional: Add label to current scene and track it
+	get_tree().current_scene.add_child(label_instance)
+	spawned_nodes.append(label_instance)
+
 
 func play_light_on():
 	print("Light turning on!")

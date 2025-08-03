@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ccvub5g3fajh3"]
+
+[node name="LeaveLabel" type="RichTextLabel"]
+z_index = 2
+offset_right = 179.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "[wave] Leave! Leave! LEAVE!"

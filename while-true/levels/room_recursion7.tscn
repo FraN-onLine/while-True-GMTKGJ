@@ -16,7 +16,7 @@ size = Vector2(431, 52)
 size = Vector2(50, 800)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdpey"]
-size = Vector2(1541, 52)
+size = Vector2(1643, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
 size = Vector2(1849, 50)
@@ -109,7 +109,7 @@ color = Color(0.1, 0.1, 0.1, 1)
 position = Vector2(600, 25)
 
 [node name="TopWallShape" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(163.5, 0)
+position = Vector2(214.5, 0)
 shape = SubResource("RectangleShape2D_gdpey")
 
 [node name="TopWallSprite" type="ColorRect" parent="TopWall"]
@@ -133,13 +133,13 @@ script = ExtResource("1_gm4cx")
 position = Vector2(1720, 756)
 
 [node name="Spawn1" type="Marker2D" parent="LoopManager"]
-position = Vector2(640, 193)
+position = Vector2(554, 218)
 
 [node name="Rise2" type="Marker2D" parent="LoopManager"]
 position = Vector2(987, 435)
 
 [node name="Spawn2" type="Marker2D" parent="LoopManager"]
-position = Vector2(1540, 188)
+position = Vector2(1281, 40)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 129.0
@@ -242,14 +242,14 @@ shape = SubResource("RectangleShape2D_nr85e")
 position = Vector2(573, -474)
 
 [node name="ColorRect" type="ColorRect" parent="some parkour blocks/StaticBody2D7"]
-offset_left = 1061.0
-offset_top = 584.0
-offset_right = 1150.0
-offset_bottom = 666.0
+offset_left = 416.0
+offset_top = 985.0
+offset_right = 505.0
+offset_bottom = 1067.0
 color = Color(0.301961, 0.105882, 0.133333, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="some parkour blocks/StaticBody2D7"]
-position = Vector2(1106, 625)
+position = Vector2(455, 1021)
 shape = SubResource("RectangleShape2D_nr85e")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

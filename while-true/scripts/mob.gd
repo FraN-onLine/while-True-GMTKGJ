@@ -3,7 +3,7 @@ extends Area2D
 @export var move_speed: float = 180.0
 
 var player: Node2D = null
-var timer := 3.5
+var timer := 3.35
 
 func _ready():
 	connect("body_entered", _on_body_entered)

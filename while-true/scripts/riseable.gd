@@ -7,7 +7,7 @@ class_name RisingObstacle
 var start_position := Vector2.ZERO
 var target_position := Vector2.ZERO
 var rising := false
-var rise_speed := 100
+var rise_speed := 115
 var direction = Vector2.UP
 
 

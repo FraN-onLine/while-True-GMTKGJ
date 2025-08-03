@@ -126,6 +126,7 @@ func _input(event):
 	if not visible:
 		return
 		
+	print(event)
 	# Handle ESC key to close editor
 	if event.is_action_pressed("close_editor"):
 		close_editor()
